@@ -1,10 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import homeImage from '../public/home.jpeg'
-import { Button } from 'rsuite'
-
-import "rsuite/dist/rsuite.min.css";
 
 export default function Home() {
   return (
@@ -12,24 +8,11 @@ export default function Home() {
       <Head>
         <title>Guardio Insurance</title>
         <meta name="description" content="Guardio Insurance" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
 
       <main className={styles.main}>
-
-        <div className={styles.homeImageDiv}>
-          <Image src={homeImage} className={styles.homeImage} alt="home image"/>
-        </div>
-
-        <div className={styles.signInDiv}>
-          <h1><span>Guardio</span> Insurance</h1>
-          <p className={styles.nameTag}>A relationship for life </p>
-          <hr />
-          <p className={styles.buttonTag}>Let's get your journey started. </p>
-          <Button className={styles.signInDivButton} size="lg" appearance='primary'>Sign In</Button>
-        </div>
-
-
-        {/* <h1 className={styles.title}>
+        <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
@@ -66,7 +49,7 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-        </div> */}
+        </div>
       </main>
 
       <footer className={styles.footer}>

@@ -1,64 +1,15 @@
+.container {
+  padding: 0 2rem;
+}
+
 .main {
   min-height: 100vh;
+  padding: 4rem 0;
   flex: 1;
   display: flex;
-}
-
-.homeImageDiv {
-  width: 50vw;
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-  background-color: #0070f3;
-}
-
-.homeImage {
-  opacity: 0.8;
-}
-
-.signInDiv {
-  width: 50vw;
-  padding: 4rem 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  flex-wrap: wrap;
-  flex: 1;
-}
-
-.signInDiv h1 {
-  font-size: 72px;
-  letter-spacing: -3px;
-  word-spacing: -6px;
-}
-
-.signInDiv h1 span {
-  color: #0070f3;
-}
-
-.nameTag {
-  position: relative;
-  top: 8px;
-  font-size: 16px;
-}
-
-.signInDiv hr {
-  margin: 40px;
-  align-self: stretch;
-}
-
-.buttonTag {
-  position: relative;
-  margin-bottom: 16px;
-  font-size: 14px;
-}
-
-.signInDivButton {
-  background-color: #0070f3;
-  width: 50%;
-  height: 60px;
-  font-size: 18px;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {
@@ -157,7 +108,7 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .grid {
     width: 100%;
     flex-direction: column;
@@ -165,17 +116,14 @@
 }
 
 @media (prefers-color-scheme: dark) {
-
   .card,
   .footer {
     border-color: #222;
   }
-
   .code {
     background: #111;
   }
-
   .logo img {
     filter: invert(1);
   }
-}
+} */
