@@ -5,8 +5,14 @@ import homeImage from '../public/home.jpeg'
 import { Button } from 'rsuite'
 
 import "rsuite/dist/rsuite.min.css";
+import { useRouter } from 'next/router'
 
 export default function Home() {
+
+  const router = useRouter();
+  const signinOnClick = ()=>{
+    router.push("/signin");
+  }
   
   return (
     <div className={styles.container}>
@@ -26,21 +32,18 @@ export default function Home() {
           <p className={styles.nameTag}>A relationship for life </p>
           <hr />
           <p className={styles.buttonTag}>Let's get your journey started. </p>
-          <Button className={styles.signInDivButton} size="lg" appearance='primary'>Sign In</Button>
+          <Button className={styles.signInDivButton} size="lg" appearance='primary' onClick={signinOnClick}>Sign In</Button>
         </div>
 
       </main>
 
       <footer className={styles.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://wso2.com/asgardeo/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
+          WSO2 Sample Application
         </a>
       </footer>
     </div>

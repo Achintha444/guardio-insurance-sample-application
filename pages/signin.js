@@ -1,22 +1,31 @@
-import { signIn } from 'next-auth/react'
+import { getSession, signIn } from 'next-auth/react'
 import React, { Component } from 'react';
 import styles from '../styles/Signin.module.css';
 import { Button, Dropdown } from 'rsuite';
 
 import "rsuite/dist/rsuite.min.css";
 
-// // Export the `session` prop to use sessions with Server Side Rendering
-// export async function getServerSideProps(context) {
-//   return {
-//       props: {
-//       session: await getSession(context),
-//       },
-//   }
-// }
+// Export the `session` prop to use sessions with Server Side Rendering
+export async function getServerSideProps(context) {
+  const session = await getSession(context)
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/temp',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: { session }
+  }
+}
 
 export default class signin extends Component {
 
-  nextOnClick = () => signIn("asgardeo", { callbackUrl: "/" });
+  nextOnClick = () => signIn("asgardeo", { callbackUrl: "/temp", });
 
   render() {
     return (
@@ -26,10 +35,10 @@ export default class signin extends Component {
           <p className={styles.signinText}>Sign in</p>
           <p className={styles.signinTag}>Select your organization to proceed</p>
 
-          <Dropdown className={styles.signinDropdown} title="Organization" trigger={['click', 'hover']} onSelect={() =>{
+          <Dropdown className={styles.signinDropdown} title="Organization" trigger={['click', 'hover']} onSelect={() => {
             console.log("check")
           }}
-        
+
           >
             <Dropdown.Item className={styles.signinDropdownItem}>Guardio Life Insurance</Dropdown.Item>
             <Dropdown.Item className={styles.signinDropdownItem}>Guardio Vehicle Insurance</Dropdown.Item>
