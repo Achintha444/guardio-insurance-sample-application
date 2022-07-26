@@ -7,6 +7,7 @@ import { Button } from 'rsuite'
 import "rsuite/dist/rsuite.min.css";
 
 export default function Home() {
+  
   return (
     <div className={styles.container}>
       <Head>

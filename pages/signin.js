@@ -1,10 +1,23 @@
+import { signIn } from 'next-auth/react'
 import React, { Component } from 'react';
 import styles from '../styles/Signin.module.css';
 import { Button, Dropdown } from 'rsuite';
 
 import "rsuite/dist/rsuite.min.css";
 
+// // Export the `session` prop to use sessions with Server Side Rendering
+// export async function getServerSideProps(context) {
+//   return {
+//       props: {
+//       session: await getSession(context),
+//       },
+//   }
+// }
+
 export default class signin extends Component {
+
+  nextOnClick = () => signIn("asgardeo", { callbackUrl: "/" });
+
   render() {
     return (
       <div className={styles.signinOuter}>
@@ -23,7 +36,7 @@ export default class signin extends Component {
           </Dropdown>
 
           <div className={styles.buttonCarousell}>
-            <Button className={styles.nextButton} size="lg" appearance='primary'>Next</Button>
+            <Button className={styles.nextButton} size="lg" appearance='primary' onClick={this.nextOnClick}>Next</Button>
             <Button size="lg" appearance="link">Register</Button>
           </div>
         </div>

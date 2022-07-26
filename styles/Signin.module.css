@@ -20,9 +20,11 @@
 }
 
 .signinInner h1 {
-    font-size: 26px;
+    font-size: 28px;
     letter-spacing: -2px;
     word-spacing: -3px;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
 }
 
 .signinInner h1 span {
