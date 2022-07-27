@@ -25,7 +25,10 @@ export async function getServerSideProps(context) {
 
 export default class signin extends Component {
 
-  nextOnClick = () => signIn("asgardeo", { callbackUrl: "/temp", });
+  nextOnClick = (event) => {
+    event.preventDefault();
+    signIn({ callbackUrl: "/temp", });
+  }
 
   render() {
     return (
@@ -45,7 +48,7 @@ export default class signin extends Component {
           </Dropdown>
 
           <div className={styles.buttonCarousell}>
-            <Button className={styles.nextButton} size="lg" appearance='primary' onClick={this.nextOnClick}>Next</Button>
+            <Button className={styles.nextButton} size="lg" appearance='primary' onClick={(event)=>this.nextOnClick(event)}>Next</Button>
             <Button size="lg" appearance="link">Register</Button>
           </div>
         </div>

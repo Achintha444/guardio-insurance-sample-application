@@ -3,7 +3,7 @@ import React from 'react'
 import { Button } from 'rsuite'
 
 export default function temp() {
-  const signOutOnClick = () => signOut("asgardeo", { callbackUrl: `${window.location.origin}` });
+  const signOutOnClick = () => signOut({ callbackUrl: "/" });
 
   return (
     <div>
