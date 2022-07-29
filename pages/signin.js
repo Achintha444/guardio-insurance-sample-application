@@ -6,7 +6,6 @@ import config from '../config.json';
 
 import "rsuite/dist/rsuite.min.css";
 
-// Export the `session` prop to use sessions with Server Side Rendering
 export async function getServerSideProps(context) {
   const session = await getSession(context)
 
