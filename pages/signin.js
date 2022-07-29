@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: '/temp',
+        destination: '/settings',
         permanent: false,
       },
     }
@@ -37,7 +37,8 @@ export default function signin() {
   } 
 
   let nextOnClick = (event) => {
-    signIn("wso2is",{ callbackUrl: "/temp"}, {orgId: subOrgId});
+    signIn("wso2is",{ callbackUrl: "/settings"});
+    //signIn("wso2is",{ callbackUrl: "/settings"}, {orgId: subOrgId});
   }
 
   return (
