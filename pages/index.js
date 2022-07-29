@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import homeImage from '../public/home.jpeg'
 import { Button } from 'rsuite'
+import Logo from '../components/logo/logo'
 
 import "rsuite/dist/rsuite.min.css";
 import { useRouter } from 'next/router'
@@ -28,7 +29,7 @@ export default function Home() {
         </div>
 
         <div className={styles.signInDiv}>
-          <h1><span>Guardio</span> Insurance</h1>
+          <Logo fontSize={72} letterSpacing={-3} wordSpacing={`normal`} />
           <p className={styles.nameTag}>A relationship for life </p>
           <hr />
           <p className={styles.buttonTag}>Let's get your journey started. </p>

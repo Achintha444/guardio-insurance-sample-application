@@ -5,6 +5,7 @@ import { Button, Dropdown } from 'rsuite';
 import config from '../config.json';
 
 import "rsuite/dist/rsuite.min.css";
+import Logo from '../components/logo/logo';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -42,7 +43,7 @@ export default function signin() {
   return (
     <div className={styles.signinOuter}>
       <div className={styles.signinInner}>
-        <h1><span>Guardio</span> Insurance</h1>
+        <Logo fontSize={28} letterSpacing={-2} wordSpacing={-3} />
         <p className={styles.signinText}>Sign in</p>
         <p className={styles.signinTag}>Select your organization to proceed</p>
 

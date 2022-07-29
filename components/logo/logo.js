@@ -6,9 +6,16 @@ export default function Logo(props) {
             <h1 style={{
                 fontSize: props.fontSize,
                 letterSpacing: props.letterSpacing,
-                wordSpacing: props.wordSpacing
+                wordSpacing: props.wordSpacing,
+                fontFamily: `'Times New Roman', Times, serif`,
+                color: `black`
             }}>
-                <span>Guardio</span> Insurance
+                <span style={{
+                    color: `#0070f3`
+                }}>
+                    Guardio
+                </span>
+                Insurance
             </h1>
         </div>
     )

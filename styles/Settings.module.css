@@ -1,0 +1,40 @@
+.mainDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+.sideNavDiv {
+    width: 15%;
+}
+
+.sideNav {
+    height: 100vh;
+}
+
+.logoDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 200px;
+    flex-direction: column;
+}
+
+.logoDiv hr {
+    margin: 12px;
+    align-self: stretch;
+  }
+
+.mainPanelDiv {
+    height: 100vh;
+    width: 85%;
+}
+
+.panel{
+    border-radius: 0;
+}
+
+.table {
+    background-color: aqua;
+}

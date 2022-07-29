@@ -19,18 +19,6 @@
     box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.05)
 }
 
-.signinInner h1 {
-    font-size: 28px;
-    letter-spacing: -2px;
-    word-spacing: -3px;
-    font-family: 'Times New Roman', Times, serif;
-    color: black;
-}
-
-.signinInner h1 span {
-    color: #0070f3;
-}
-
 .signinText {
     font-size: 26px;
     position: relative;

@@ -29,18 +29,6 @@
   flex: 1;
 }
 
-.signInDiv h1 {
-  font-size: 72px;
-  letter-spacing: -3px;
-  word-spacing: -6px;
-  font-family: 'Times New Roman', Times, serif;
-  color: black;
-}
-
-.signInDiv h1 span {
-  color: #0070f3;
-}
-
 .nameTag {
   position: relative;
   top: 10px;
