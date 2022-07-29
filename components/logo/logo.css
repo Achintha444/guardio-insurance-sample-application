@@ -1,0 +1,8 @@
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+}
+
+h1 span {
+    color: #0070f3;
+}
