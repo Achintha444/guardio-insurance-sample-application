@@ -13,6 +13,7 @@ import { getSession, signOut, useSession } from 'next-auth/react';
 import HomeComponent from '../components/settingsComponents/homeComponent';
 import LogoComponent from '../components/settingsComponents/logoComponent';
 import ViewUserComponent from '../components/settingsComponents/viewUserComponent';
+import { meDetails } from '../util/apiDecode';
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
@@ -37,29 +38,12 @@ export async function getServerSideProps(context) {
 
 export default function settings() {
 
+    const SETTINGS_UI = "settings interface"
+
     const { data: session, cookie, status } = useSession();
 
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
-
-    const callAPI = async () => {
-        console.log(session);
-        const headers = {
-            "accept": "application/scim+json",
-            "authorization": "Bearer " + session.accessToken
-        }
-        try {
-            const res = await fetch(
-                `https://localhost:9443/o/${config.WSO2IS_LIFE_ORG_ID}/scim2/Me`,
-                headers
-            );
-            const data = await res.json();
-            console.log(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    callAPI();
+    
     const signOutOnClick = () => signOut({ callbackUrl: "/" });
 
     const mainPanelComponenet = (activeKey, session) => {
@@ -113,7 +97,3 @@ export default function settings() {
         </div>
     )
 }
-
-
-
-
