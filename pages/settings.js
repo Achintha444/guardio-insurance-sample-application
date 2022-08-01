@@ -12,6 +12,7 @@ import Logo from '../components/logo/logo';
 import { getSession, signOut, useSession } from 'next-auth/react';
 import HomeComponent from '../components/settingsComponents/homeComponent';
 import LogoComponent from '../components/settingsComponents/logoComponent';
+import ViewUserComponent from '../components/settingsComponents/viewUserComponent';
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
@@ -36,7 +37,7 @@ export async function getServerSideProps(context) {
 
 export default function settings() {
 
-    const { data: session, status } = useSession();
+    const { data: session, cookie, status } = useSession();
 
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
 
@@ -66,7 +67,7 @@ export default function settings() {
             case '1':
                 return HomeComponent(session);
             case '2-1':
-                return HomeComponent(session);
+                return ViewUserComponent(session);
             case '2-2':
                 return HomeComponent(session);
             case '2-3':
@@ -75,7 +76,7 @@ export default function settings() {
         }
     }
 
-    const activeKeySideNavSelect = (eventKey)=>{
+    const activeKeySideNavSelect = (eventKey) => {
         setActiveKeySideNav(eventKey);
     }
 
@@ -88,13 +89,13 @@ export default function settings() {
                     </Sidenav.Header>
                     <Sidenav.Body>
                         <Nav activeKey={activeKeySideNav}>
-                            <Nav.Item eventKey="1" icon={<DashboardIcon />} onSelect={(eventKey)=>activeKeySideNavSelect(eventKey)}>
+                            <Nav.Item eventKey="1" icon={<DashboardIcon />} onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
                                 Dashboard
                             </Nav.Item>
                             <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}>
-                                <Nav.Item eventKey="2-1" onSelect={(eventKey)=>activeKeySideNavSelect(eventKey)}>View Users</Nav.Item>
-                                <Nav.Item eventKey="2-2" onSelect={(eventKey)=>activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
-                                <Nav.Item eventKey="2-3" onSelect={(eventKey)=>activeKeySideNavSelect(eventKey)}>Add IDP</Nav.Item>
+                                <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>View Users</Nav.Item>
+                                <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
+                                <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add IDP</Nav.Item>
                             </Nav.Menu>
                         </Nav>
                     </Sidenav.Body>
@@ -106,7 +107,7 @@ export default function settings() {
                 </Sidenav>
             </div>
             <div className={styles.mainPanelDiv}>
-                {mainPanelComponenet(activeKeySideNav,session)}
+                {mainPanelComponenet(activeKeySideNav, session)}
             </div>
 
         </div>

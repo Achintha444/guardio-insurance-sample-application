@@ -10,7 +10,7 @@ export default NextAuth({
       clientSecret: process.env.WSO2IS_CLIENT_SECRET,
       type: "oauth",
       wellKnown: process.env.WSO2IS_HOST + "/o/" + process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID + "/oauth2/token/.well-known/openid-configuration",
-      userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"oauth2/userinfo",
+      userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"/oauth2/userinfo",
       authorization: {
         params: {
           scope: process.env.WSO2IS_SCOPES,
@@ -31,6 +31,8 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
       console.log(user);
+      console.log(account);
+      console.log(token);
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token

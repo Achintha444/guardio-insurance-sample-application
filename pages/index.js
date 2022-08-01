@@ -17,11 +17,6 @@ export default function Home() {
   
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Guardio Insurance</title>
-        <meta name="description" content="Guardio Insurance" />
-      </Head>
-
       <main className={styles.main}>
 
         <div className={styles.homeImageDiv}>

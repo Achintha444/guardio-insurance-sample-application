@@ -63,6 +63,17 @@
     height: 100%;
 }
 
+.tableMainPanelDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+}
+
+.tableMainPanelDiv .rs-table-body-row-wrapper {
+    height: 100vh;
+}
+
 .table {
     background-color: aqua;
 }
