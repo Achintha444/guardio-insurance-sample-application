@@ -43,26 +43,26 @@ export default function ViewUserComponent(session) {
                 }}
             >
                 <Column width={300} align="center" fixed>
-                    <HeaderCell>Id</HeaderCell>
+                    <HeaderCell><h6>Id</h6></HeaderCell>
                     <Cell dataKey="id" />
                 </Column>
 
-                <Column width={200}>
-                    <HeaderCell>User Name</HeaderCell>
+                <Column width={200} align="center">
+                    <HeaderCell><h6>User Name</h6></HeaderCell>
                     <Cell dataKey="userName" />
                 </Column>
 
-                <Column width={200}>
-                    <HeaderCell>Name</HeaderCell>
+                <Column width={200} align="center">
+                    <HeaderCell><h6>Name</h6></HeaderCell>
                     <Cell dataKey="name" />
                 </Column>
 
-                <Column width={300}>
-                    <HeaderCell>Email</HeaderCell>
+                <Column width={300} align="center">
+                    <HeaderCell><h6>Email</h6></HeaderCell>
                     <Cell dataKey="email" />
                 </Column>
-                <Column width={80} fixed="right">
-                    <HeaderCell>...</HeaderCell>
+                <Column width={80} align="center" fixed="right">
+                    <HeaderCell><h6>...</h6></HeaderCell>
 
                     <Cell>
                         {rowData => (
