@@ -6,11 +6,11 @@ import { fetchUsers } from '../../util/apiCall';
 import styles from '../../styles/Settings.module.css';
 import { consoleLogDebug } from '../../util/util';
 
-export default function ViewUserComponent(session) {
+export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
 
     // const fetchData = async()=> {
-    //     const res = await fetchUsers(session);
+    //     const res = await fetchUsers(props.session);
     //     consoleLogDebug(res);
     //     setUsers(res);
     // }
@@ -18,13 +18,13 @@ export default function ViewUserComponent(session) {
     // fetchData();
 
     useLayoutEffect(() => {
-        console.log("test123");
+        console.log(props);
         async function fetchData() {
-            const res1 = await usersDetails(session);
+            const res1 = await usersDetails(props.session);
             setUsers(res1);
         }
         fetchData();
-    });
+    },[props]);
 
     const { Column, HeaderCell, Cell } = Table;
     

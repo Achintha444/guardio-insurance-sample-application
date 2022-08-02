@@ -10,12 +10,12 @@ import { consoleLogDebug } from '../../util/util';
 
 import { fetchUsers } from '../../util/apiCall';
 
-export default function HomeComponent(session) {
+export default function HomeComponent(props) {
 
     const [me, setMe] = useState(null);
 
     // const fetchData = async()=> {
-    //     const res = await meDetails(session);
+    //     const res = await meDetails(props.session);
     //     setMe(res);
     // }
 
@@ -24,11 +24,11 @@ export default function HomeComponent(session) {
     useLayoutEffect(() => {
         consoleLogDebug("HOME","TEST");
         async function fetchData() {
-            const res = await meDetails(session);
+            const res = await meDetails(props.session);
             setMe(res);
         }
         fetchData();
-    }, [session]);
+    },[props]);
 
     return (
         <div className={styles.homeMainPanelDiv}>

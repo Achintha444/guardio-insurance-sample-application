@@ -10,4 +10,8 @@ function consoleLogError(title,message){
     console.log(`\n ERROR : ${title} : ${JSON.stringify(message,null,'\t')}`);
 }
 
-module.exports = { consoleLogInfo, consoleLogDebug, consoleLogError  };
+function stringIsEmpty(str){
+    return (str === "");
+}
+
+module.exports = { consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty  };
