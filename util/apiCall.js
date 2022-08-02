@@ -11,7 +11,7 @@ function getHeader(session) {
     return { headers };
 }
 
-async function me(session) {
+async function fetchMe(session) {
     consoleLogInfo(`session ${API_CALL}`, session);
 
     try {
@@ -49,4 +49,4 @@ async function fetchUsers(session) {
     }
 }
 
-module.exports = { me, fetchUsers }
+module.exports = { fetchMe, fetchUsers }

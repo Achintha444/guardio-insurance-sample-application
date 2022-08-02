@@ -51,11 +51,11 @@ export default function settings() {
             case '1':
                 return HomeComponent(session);
             case '2-1':
-                return new ViewUserComponent(session);
+                return ViewUserComponent(session);
             case '2-2':
-                return new HomeComponent(session);
+                return HomeComponent(session);
             case '2-3':
-                return new HomeComponent(session);
+                return HomeComponent(session);
 
         }
     }

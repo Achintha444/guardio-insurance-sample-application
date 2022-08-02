@@ -4,9 +4,11 @@ import Logo from '../logo/logo';
 import styles from '../../styles/Settings.module.css';
 import profileImage from '../../public/profile.svg'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { meDetails } from '../../util/apiDecode';
 import { consoleLogDebug } from '../../util/util';
+
+import { fetchUsers } from '../../util/apiCall';
 
 export default function HomeComponent(session) {
 
@@ -19,14 +21,14 @@ export default function HomeComponent(session) {
 
     // fetchData();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         consoleLogDebug("HOME","TEST");
         async function fetchData() {
             const res = await meDetails(session);
             setMe(res);
         }
         fetchData();
-    }, []);
+    }, [session]);
 
     return (
         <div className={styles.homeMainPanelDiv}>

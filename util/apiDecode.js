@@ -1,19 +1,23 @@
-import { me } from "./apiCall";
+import { fetchMe, fetchUsers } from "./apiCall";
 import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
 
 const API_DECODE = "API DECODE";
 
+function decodeUser(user) {
+    return {
+        "id": user.id,
+        "userName": user.userName,
+        "name": user.name!=undefined ? user.name.givenName : "Not Defined",
+        "email": user.emails!=undefined ? user.emails[0] : "Not Defined"
+    };
+}
+
 async function meDetails(session) {
 
     try {
-        const meData = await me(session);
-        
-        const meReturn = {
-            "id": meData.id,
-            "userName": meData.userName,
-            "name": meData.name!=undefined ? meData.name.givenName : "Not Defined",
-            "email": meData.emails!=undefined ? meData.emails[0] : "Not Defined"
-        };
+        const meData = await fetchMe(session);
+
+        const meReturn = decodeUser(meData);
 
         consoleLogInfo(`${API_DECODE} meDetails`, meReturn)
 
@@ -25,4 +29,27 @@ async function meDetails(session) {
 
 }
 
-module.exports = { meDetails }
+async function usersDetails(session) {
+
+    try {
+        
+        const usersData = await fetchUsers(session);
+
+        const usersReturn = [];
+
+        usersData["Resources"].map((user)=>{
+            usersReturn.push(decodeUser(user));
+        })
+
+        consoleLogInfo(`${API_DECODE} usersDetails`, usersReturn)
+
+        return usersReturn;
+    } catch (err) {
+        consoleLogError(`${API_DECODE} usersDetails`, err);
+        return null
+    }
+
+}
+
+
+module.exports = { meDetails, usersDetails }

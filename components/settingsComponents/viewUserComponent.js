@@ -1,12 +1,13 @@
 import { Table } from 'rsuite';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { usersDetails } from '../../util/apiDecode';
 import { fetchUsers } from '../../util/apiCall';
 
 import styles from '../../styles/Settings.module.css';
 import { consoleLogDebug } from '../../util/util';
 
 export default function ViewUserComponent(session) {
-    const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState([]);
 
     // const fetchData = async()=> {
     //     const res = await fetchUsers(session);
@@ -16,13 +17,14 @@ export default function ViewUserComponent(session) {
 
     // fetchData();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
+        console.log("test123");
         async function fetchData() {
-            const res1 = await fetchUsers(session);
+            const res1 = await usersDetails(session);
             setUsers(res1);
         }
         fetchData();
-    }, []);
+    });
 
     const { Column, HeaderCell, Cell } = Table;
     
@@ -35,6 +37,7 @@ export default function ViewUserComponent(session) {
             <h2>Users of Guardio Life Insurance</h2>
             <Table
                 height={900}
+                data = {users}
                 onRowClick={rowData => {
                     console.log(rowData);
                 }}
@@ -44,9 +47,14 @@ export default function ViewUserComponent(session) {
                     <Cell dataKey="id" />
                 </Column>
 
-                <Column width={300}>
+                <Column width={200}>
+                    <HeaderCell>User Name</HeaderCell>
+                    <Cell dataKey="userName" />
+                </Column>
+
+                <Column width={200}>
                     <HeaderCell>Name</HeaderCell>
-                    <Cell dataKey="firstName" />
+                    <Cell dataKey="name" />
                 </Column>
 
                 <Column width={300}>
