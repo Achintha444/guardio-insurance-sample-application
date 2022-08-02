@@ -11,6 +11,14 @@ function getHeader(session) {
     return { headers };
 }
 
+function getPOSTRequestOptions(session, body){
+    return {
+        method: 'POST',
+        headers: getHeader(session),
+        body: JSON.stringify(body)
+    }
+}
+
 async function fetchMe(session) {
     consoleLogInfo(`session ${API_CALL}`, session);
 
@@ -37,6 +45,23 @@ async function fetchUsers(session) {
         const res = await fetch(
             `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
             getHeader(session)
+        );
+        const data = await res.json();
+        consoleLogDebug(`${API_CALL} users`, data);
+
+        return data;
+    } catch (err) {
+        consoleLogError(`${API_CALL} users`, err);
+
+        return null;
+    }
+}
+
+async function addUser(session, user) {
+    try {
+        const res = await fetch(
+            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
+            getPOSTRequestOptions(session, user)
         );
         const data = await res.json();
         consoleLogDebug(`${API_CALL} users`, data);

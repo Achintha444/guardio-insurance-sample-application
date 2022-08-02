@@ -7,8 +7,8 @@ function decodeUser(user) {
     return {
         "id": user.id,
         "userName": user.userName,
-        "name": user.name!=undefined ? user.name.givenName : "Not Defined",
-        "email": user.emails!=undefined ? user.emails[0] : "Not Defined"
+        "name": user.name != undefined ? user.name.givenName : "Not Defined",
+        "email": user.emails != undefined ? user.emails[0] : "Not Defined"
     };
 }
 
@@ -32,12 +32,12 @@ async function meDetails(session) {
 async function usersDetails(session) {
 
     try {
-        
+
         const usersData = await fetchUsers(session);
 
         const usersReturn = [];
 
-        usersData["Resources"].map((user)=>{
+        usersData["Resources"].map((user) => {
             usersReturn.push(decodeUser(user));
         })
 
@@ -51,5 +51,24 @@ async function usersDetails(session) {
 
 }
 
+async function addUserEncode(session, name, email, username, password) {
+    const addUserEncode = {
+        "schemas": [],
+        "name": {
+            "givenName": name
+        },
+        "userName": username,
+        "password": password,
+        "emails": [
+            {
+                "value": email,
+                "primary": true
+            }
+        ],
+    }
 
-module.exports = { meDetails, usersDetails }
+
+}
+
+
+module.exports = { meDetails, usersDetails, addUserEncode }
