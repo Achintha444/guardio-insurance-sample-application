@@ -1,52 +1,40 @@
 import { Table } from 'rsuite';
+import React, { useEffect, useState } from 'react';
+import { fetchUsers } from '../../util/apiCall';
 
 import styles from '../../styles/Settings.module.css';
+import { consoleLogDebug } from '../../util/util';
 
 export default function ViewUserComponent(session) {
+    const [users, setUsers] = useState(null);
+
+    // const fetchData = async()=> {
+    //     const res = await fetchUsers(session);
+    //     consoleLogDebug(res);
+    //     setUsers(res);
+    // }
+
+    // fetchData();
+
+    useEffect(() => {
+        async function fetchData() {
+            const res1 = await fetchUsers(session);
+            setUsers(res1);
+        }
+        fetchData();
+    }, []);
+
     const { Column, HeaderCell, Cell } = Table;
+    
+    console.log("test123");
 
-    const createRowData = rowIndex => {
-        const randomKey = Math.floor(Math.random() * 9);
-        const names = ['Hal', 'Bryan', 'Linda', 'Nancy', 'Lloyd', 'Alice', 'Julia', 'Albert', 'Hazel'];
-        const citys = [
-            'Beijing',
-            'Shanghai',
-            'New Amieshire',
-            'New Gust',
-            'Lefflerstad',
-            'East Catalina',
-            'Ritchieborough',
-            'Gilberthaven',
-            'Eulaliabury'
-        ];
-        const emails = [
-            'yahoo.com',
-            'gmail.com',
-            'hotmail.com',
-            'outlook.com',
-            'aol.com',
-            'live.com',
-            'msn.com',
-            'yandex.com',
-            'mail.ru'
-        ];
-
-        return {
-            id: rowIndex + 1,
-            name: names[randomKey],
-            city: citys[randomKey],
-            email: names[randomKey].toLocaleLowerCase() + '@' + emails[randomKey]
-        };
-    };
-
-    const data = Array.from({ length: 20 }).map((_, index) => createRowData(index));
+    consoleLogDebug("view user",users);
         
     return (
         <div className={styles.tableMainPanelDiv}>
             <h2>Users of Guardio Life Insurance</h2>
             <Table
                 height={900}
-                data={data}
                 onRowClick={rowData => {
                     console.log(rowData);
                 }}

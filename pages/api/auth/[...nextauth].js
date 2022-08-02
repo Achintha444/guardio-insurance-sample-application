@@ -11,6 +11,7 @@ export default NextAuth({
       clientSecret: "1qAvHbjfyDfRgDtaNEuf7U7c8xga",
       type: "oauth",
       wellKnown: process.env.WSO2IS_HOST + "/t/" + process.env.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
+      userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.WSO2IS_TENANT_NAME+"/scim2/Me",
       // wellKnown: process.env.WSO2IS_HOST + "/o/" + process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID + "/oauth2/token/.well-known/openid-configuration",
       // userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"/oauth2/userinfo",
       authorization: {

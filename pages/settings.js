@@ -40,7 +40,7 @@ export default function settings() {
 
     const SETTINGS_UI = "settings interface"
 
-    const { data: session, cookie, status } = useSession();
+    const { data: session, status } = useSession();
 
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
     
@@ -51,11 +51,11 @@ export default function settings() {
             case '1':
                 return HomeComponent(session);
             case '2-1':
-                return ViewUserComponent(session);
+                return new ViewUserComponent(session);
             case '2-2':
-                return HomeComponent(session);
+                return new HomeComponent(session);
             case '2-3':
-                return HomeComponent(session);
+                return new HomeComponent(session);
 
         }
     }
@@ -86,8 +86,6 @@ export default function settings() {
                     <div className={styles.nextButtonDiv}>
                         <Button size="lg" appearance='ghost' onClick={signOutOnClick}>Sign Out</Button>
                     </div>
-
-
                 </Sidenav>
             </div>
             <div className={styles.mainPanelDiv}>

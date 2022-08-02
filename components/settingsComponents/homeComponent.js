@@ -6,12 +6,21 @@ import profileImage from '../../public/profile.svg'
 
 import React, { useEffect, useState } from 'react'
 import { meDetails } from '../../util/apiDecode';
+import { consoleLogDebug } from '../../util/util';
 
 export default function HomeComponent(session) {
 
     const [me, setMe] = useState(null);
 
+    // const fetchData = async()=> {
+    //     const res = await meDetails(session);
+    //     setMe(res);
+    // }
+
+    // fetchData();
+
     useEffect(() => {
+        consoleLogDebug("HOME","TEST");
         async function fetchData() {
             const res = await meDetails(session);
             setMe(res);
