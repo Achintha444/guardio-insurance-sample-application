@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Form, Input, ButtonToolbar, Button } from 'rsuite';
+import { Form, Input, ButtonToolbar, Button, Loader } from 'rsuite';
 
 import styles from '../../styles/Settings.module.css';
 import stylesSignin from '../../styles/Signin.module.css';
@@ -13,6 +13,9 @@ export default function AddUserComponent(props) {
 
     const ADD_USER_COMPONENT = "ADD USER COMPONENT";
 
+    const LOADING_DISPLAY_NONE = "none";
+    const LOADING_DISPLAY_BLOCK = "block";
+
     const [nameField, setNameField] = useState("");
     const [emailField, setemailField] = useState("");
     const [usernameField, setUsernameField] = useState("");
@@ -24,6 +27,8 @@ export default function AddUserComponent(props) {
     const [usernameError, setUsernameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [repasswordError, setRePasswordError] = useState(false);
+
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
     const onFormvValueChange = (setField, event) => {
         setField(event);
@@ -45,9 +50,6 @@ export default function AddUserComponent(props) {
         checkFieldError(passwordField, setPasswordError);
         checkFieldError(repasswordField, setRePasswordError);
 
-        consoleLogDebug(nameError || emailError || usernameError
-            || passwordError || repasswordError);
-
         return (nameError || emailError || usernameError
             || passwordError || repasswordError);
 
@@ -61,8 +63,10 @@ export default function AddUserComponent(props) {
 
     return (
         <div className={styles.addUserMainDiv}>
+            
             <h2>Add User to Guardio Life Insurance</h2>
             <div className={styles.addUserFormDiv}>
+               
                 <Form layout="vertical" className={styles.addUserForm} fluid>
                     <Form.Group controlId="name-6">
                         <Form.ControlLabel>Name</Form.ControlLabel>
@@ -123,6 +127,12 @@ export default function AddUserComponent(props) {
                     </Form.Group>
                 </Form>
             </div>
+            <div style={{
+                display: {loadingDisplay}
+            }}>
+                <Loader  size="lg" backdrop content="User is adding" vertical />
+            </div>
+            
 
         </div>
 
