@@ -15,6 +15,7 @@ import LogoComponent from '../components/settingsComponents/logoComponent';
 import ViewUserComponent from '../components/settingsComponents/viewUserComponent';
 import { meDetails } from '../util/apiDecode';
 import AddUserComponent from '../components/settingsComponents/addUserComponent';
+import IdentityProviders from "../components/settingsComponents/identity-providers/identity-providers";
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
@@ -56,7 +57,7 @@ export default function settings() {
             case '2-2':
                 return <AddUserComponent session={session} />;
             case '2-3':
-                return <HomeComponent session={session} />;
+                return <IdentityProviders session={session} />;
 
         }
     }
@@ -80,7 +81,7 @@ export default function settings() {
                             <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}>
                                 <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>View Users</Nav.Item>
                                 <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
-                                <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add IDP</Nav.Item>
+                                <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item>
                             </Nav.Menu>
                         </Nav>
                     </Sidenav.Body>
