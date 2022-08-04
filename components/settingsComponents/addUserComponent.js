@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Field } from 'react-final-form'
+import { Form, Field, FORM_ERROR } from 'react-final-form'
 import { Button, ButtonToolbar, Loader } from 'rsuite';
 import FormSuite from 'rsuite/Form';
 import { addUserEncode } from '../../util/apiDecode';
@@ -69,7 +69,7 @@ export default function AddUserComponent(props) {
         return errors
     }
 
-    const onDataSubmit = (response, values) => {
+    const onDataSubmit = (response) => {
         if (response) {
             setSuccessDialogOpen(true);
         } else {
@@ -77,13 +77,14 @@ export default function AddUserComponent(props) {
         }
     }
 
-    const onSubmit = async values => {
+    const onSubmit = async (values ,form)=> {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         window.alert(JSON.stringify(values, 0, 2));
         addUserEncode(props.session, values.name, values.email,
             values.username, values.password)
-            .then((response) => onDataSubmit(response, values))
+            .then((response) => onDataSubmit(response))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
+        form.restart();
     }
 
     const closeSuccessDialog = () => {
@@ -101,7 +102,7 @@ export default function AddUserComponent(props) {
                     validate={validate}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <FormSuite ayout="vertical" className={styles.addUserForm}
-                            onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
+                            onSubmit={handleSubmit} fluid>
                             <Field
                                 name="name"
                                 render={({ input, meta }) => (
