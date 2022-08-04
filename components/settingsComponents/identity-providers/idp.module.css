@@ -1,0 +1,22 @@
+
+.idp__template__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.idp__template__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: whitesmoke 1px solid;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+}
+
+.idp__template__card:hover {
+    background-color: whitesmoke;
+    transition: background-color 10ms linear;
+    cursor: pointer;
+}
