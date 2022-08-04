@@ -1,4 +1,4 @@
-import { fetchMe, fetchUsers } from "./apiCall";
+import { fetchMe, fetchUsers, addUser } from "./apiCall";
 import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
 
 const API_DECODE = "API DECODE";
@@ -64,10 +64,18 @@ async function addUserEncode(session, name, email, username, password) {
                 "value": email,
                 "primary": true
             }
-        ],
+        ]
     }
 
+    try {
+        await addUser(session,addUserEncode);
 
+        return true;
+    } catch(err){
+        console.log(err);
+        consoleLogError(API_DECODE, err);
+        return false;
+    }
 }
 
 
