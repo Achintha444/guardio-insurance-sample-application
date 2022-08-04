@@ -1,4 +1,4 @@
-import { fetchMe, fetchUsers } from "./apiCall";
+import { fetchMe, fetchUsers, addUser, editUser } from "./apiCall";
 import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
 
 const API_DECODE = "API DECODE";
@@ -6,7 +6,7 @@ const API_DECODE = "API DECODE";
 function decodeUser(user) {
     return {
         "id": user.id,
-        "userName": user.userName,
+        "username": user.userName,
         "name": user.name != undefined ? user.name.givenName : "Not Defined",
         "email": user.emails != undefined ? user.emails[0] : "Not Defined"
     };
@@ -64,11 +64,51 @@ async function addUserEncode(session, name, email, username, password) {
                 "value": email,
                 "primary": true
             }
-        ],
+        ]
     }
 
+    try {
+        await addUser(session, addUserEncode);
 
+        return true;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
+}
+
+async function editUserEncode(session, id, name, email, username) {
+    const editUserEncode = {
+        "schemas": [
+            "urn:ietf:params:scim:api:messages:2.0:PatchOp"
+        ],
+        "Operations": [
+            {
+                "op": "replace",
+                "value": {
+                    "name": {
+                        "givenName": name
+                    },
+                    "userName": username,
+                    "emails": [
+                        {
+                            "value": email,
+                            "primary": true
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+
+    try {
+        await editUser(session, id, editUserEncode);
+        return true;
+    } catch (err) {
+        console.log(err);
+        return false;
+    }
 }
 
 
-module.exports = { meDetails, usersDetails, addUserEncode }
+module.exports = { meDetails, usersDetails, addUserEncode, editUserEncode }
