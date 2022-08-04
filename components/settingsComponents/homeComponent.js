@@ -61,7 +61,7 @@ function userDetailsBody(me) {
         <div className={styles.userDetails}>
             <div className={styles.userDetailsBody}>
                 <p><b>ID : </b>{me.id}</p>
-                <p><b>Username : </b>{me.userName}</p>
+                <p><b>Username : </b>{me.username}</p>
                 <p><b>Name : </b>{me.name}</p>
                 <p><b>Email : </b>{me.email}</p>
             </div>

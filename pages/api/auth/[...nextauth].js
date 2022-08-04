@@ -7,8 +7,8 @@ export default NextAuth({
     {
       id: "wso2is",
       name: "WSO2IS",
-      clientId: "UmeTFqYqqNA2PhwzbzjkmGYnv5Qa",
-      clientSecret: "1qAvHbjfyDfRgDtaNEuf7U7c8xga",
+      clientId: "Q3M7aSzMJQMzmHG7Jrintgn6wCka",
+      clientSecret: "RhGob0Kqof4xA2Oepp9rZJz2OYsa",
       type: "oauth",
       wellKnown: process.env.WSO2IS_HOST + "/t/" + process.env.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
       userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.WSO2IS_TENANT_NAME+"/scim2/Me",

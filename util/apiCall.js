@@ -3,20 +3,36 @@ import config from '../config.json';
 
 const API_CALL = "API CALL"
 
-function getHeader(session) {
+const POST_METHOD = "POST";
+const PATCH_METHOD = "PATCH";
+
+function sentDataHeader(session) {
     const headers = {
         "accept": "application/scim+json",
-        "authorization": "Bearer " + session.accessToken
+        "content-type": "application/scim+json",
+        "authorization": "Bearer " + session.accessToken,
+        "access-control-allow-origin": "http://localhost:3000"
     }
-    return { headers };
+    return headers;
 }
 
-function getPOSTRequestOptions(session, body){
-    return {
-        method: 'POST',
-        headers: getHeader(session),
+function getDataHeader(session) {
+    const headers = {
+        "accept": "application/scim+json",
+        "authorization": "Bearer " + session.accessToken,
+    }
+
+    return { headers }
+}
+
+function getSentDataRequestOptions(session, method, body) {
+    const request =  {
+        method: method,
+        headers: sentDataHeader(session),
         body: JSON.stringify(body)
     }
+    console.log(request);
+    return request;
 }
 
 async function fetchMe(session) {
@@ -25,7 +41,7 @@ async function fetchMe(session) {
     try {
         const res = await fetch(
             `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
-            getHeader(session)
+            getDataHeader(session)
         );
         const data = await res.json();
         consoleLogDebug(`${API_CALL} me`, data);
@@ -44,7 +60,7 @@ async function fetchUsers(session) {
     try {
         const res = await fetch(
             `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
-            getHeader(session)
+            getDataHeader(session)
         );
         const data = await res.json();
         consoleLogDebug(`${API_CALL} users`, data);
@@ -58,20 +74,25 @@ async function fetchUsers(session) {
 }
 
 async function addUser(session, user) {
-    try {
-        const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
-            getPOSTRequestOptions(session, user)
-        );
-        const data = await res.json();
-        consoleLogDebug(`${API_CALL} users`, data);
+    const res = await fetch(
+        `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
+        getSentDataRequestOptions(session, POST_METHOD, user)
+    );
+    const data = await res.json();
+    consoleLogDebug(`${API_CALL} users`, data);
 
-        return data;
-    } catch (err) {
-        consoleLogError(`${API_CALL} users`, err);
-
-        return null;
-    }
+    return data;
 }
 
-module.exports = { fetchMe, fetchUsers }
+async function editUser(session, id, user) {
+    const res = await fetch(
+        `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users/${id}`,
+        getSentDataRequestOptions(session, PATCH_METHOD, user)
+    );
+    const data = await res.json();
+    consoleLogDebug(`${API_CALL} edit users`, data);
+
+    return data;
+}
+
+module.exports = { fetchMe, fetchUsers, addUser, editUser }

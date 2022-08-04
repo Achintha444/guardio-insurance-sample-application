@@ -17,6 +17,7 @@ import { meDetails } from '../util/apiDecode';
 import AddUserComponent from '../components/settingsComponents/addUserComponent';
 import IdentityProviders from "../components/settingsComponents/identity-providers/identity-providers";
 
+
 export async function getServerSideProps(context) {
     const session = await getSession(context);
 
