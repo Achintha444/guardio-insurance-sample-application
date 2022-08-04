@@ -4,6 +4,7 @@ import config from '../config.json';
 const API_CALL = "API CALL"
 
 const POST_METHOD = "POST";
+const PATCH_METHOD = "PATCH";
 
 function sentDataHeader(session) {
     const headers = {
@@ -73,7 +74,6 @@ async function fetchUsers(session) {
 }
 
 async function addUser(session, user) {
-    console.log(user);
     const res = await fetch(
         `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
         getSentDataRequestOptions(session, POST_METHOD, user)
@@ -84,4 +84,15 @@ async function addUser(session, user) {
     return data;
 }
 
-module.exports = { fetchMe, fetchUsers, addUser }
+async function editUser(session, id, user) {
+    const res = await fetch(
+        `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users/${id}`,
+        getSentDataRequestOptions(session, PATCH_METHOD, user)
+    );
+    const data = await res.json();
+    consoleLogDebug(`${API_CALL} edit users`, data);
+
+    return data;
+}
+
+module.exports = { fetchMe, fetchUsers, addUser, editUser }

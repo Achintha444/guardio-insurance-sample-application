@@ -1,4 +1,4 @@
-import { fetchMe, fetchUsers, addUser } from "./apiCall";
+import { fetchMe, fetchUsers, addUser, editUser } from "./apiCall";
 import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
 
 const API_DECODE = "API DECODE";
@@ -68,15 +68,48 @@ async function addUserEncode(session, name, email, username, password) {
     }
 
     try {
-        await addUser(session,addUserEncode);
+        await addUser(session, addUserEncode);
 
         return true;
-    } catch(err){
+    } catch (err) {
         console.log(err);
-        consoleLogError(API_DECODE, err);
+        return false;
+    }
+}
+
+async function editUserEncode(session, id, name, email, username) {
+    const editUserEncode = {
+        "schemas": [
+            "urn:ietf:params:scim:api:messages:2.0:PatchOp"
+        ],
+        "Operations": [
+            {
+                "op": "replace",
+                "value": {
+                    "name": {
+                        "givenName": name
+                    },
+                    "userName": username,
+                    "password": password,
+                    "emails": [
+                        {
+                            "value": email,
+                            "primary": true
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+
+    try {
+        await editUser(session, id, editUserEncode);
+        return true;
+    } catch (err) {
+        console.log(err);
         return false;
     }
 }
 
 
-module.exports = { meDetails, usersDetails, addUserEncode }
+module.exports = { meDetails, usersDetails, addUserEncode, editUserEncode }
