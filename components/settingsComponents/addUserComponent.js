@@ -22,7 +22,6 @@ export default function AddUserComponent(props) {
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-
     const nameValidate = (name, errors) => {
         if (!name) {
             errors.name = 'This field cannot be empty'
@@ -69,9 +68,10 @@ export default function AddUserComponent(props) {
         return errors
     }
 
-    const onDataSubmit = (response) => {
+    const onDataSubmit = (response,form) => {
         if (response) {
             setSuccessDialogOpen(true);
+            form.restart();
         } else {
 
         }
@@ -82,9 +82,8 @@ export default function AddUserComponent(props) {
         window.alert(JSON.stringify(values, 0, 2));
         addUserEncode(props.session, values.name, values.email,
             values.username, values.password)
-            .then((response) => onDataSubmit(response))
+            .then((response) => onDataSubmit(response, form))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
-        form.restart();
     }
 
     const closeSuccessDialog = () => {

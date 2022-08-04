@@ -6,7 +6,7 @@ const API_DECODE = "API DECODE";
 function decodeUser(user) {
     return {
         "id": user.id,
-        "userName": user.userName,
+        "username": user.userName,
         "name": user.name != undefined ? user.name.givenName : "Not Defined",
         "email": user.emails != undefined ? user.emails[0] : "Not Defined"
     };
@@ -90,7 +90,6 @@ async function editUserEncode(session, id, name, email, username) {
                         "givenName": name
                     },
                     "userName": username,
-                    "password": password,
                     "emails": [
                         {
                             "value": email,

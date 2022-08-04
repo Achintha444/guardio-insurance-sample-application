@@ -5,20 +5,15 @@ import { fetchUsers } from '../../util/apiCall';
 
 import styles from '../../styles/Settings.module.css';
 import { consoleLogDebug } from '../../util/util';
+import EditUserComponent from '../editUser/editUserComponent';
 
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
+    const [editUserOpen, setEditUserOpen] = useState(false);
 
-    // const fetchData = async()=> {
-    //     const res = await fetchUsers(props.session);
-    //     consoleLogDebug(res);
-    //     setUsers(res);
-    // }
-
-    // fetchData();
+    const [openUser, setOpenUser] = useState({});
 
     useLayoutEffect(() => {
-        console.log(props);
         async function fetchData() {
             const res1 = await usersDetails(props.session);
             setUsers(res1);
@@ -27,20 +22,24 @@ export default function ViewUserComponent(props) {
     },[props]);
 
     const { Column, HeaderCell, Cell } = Table;
-    
-    console.log("test123");
 
-    consoleLogDebug("view user",users);
-        
+    const closeEditDialog = () => {
+        setOpenUser({});
+        setEditUserOpen(false);
+    } 
+
+    const onEditClick = (user)=>{
+        setOpenUser(user);
+        setEditUserOpen(true);
+    }
+    
     return (
         <div className={styles.tableMainPanelDiv}>
+            <EditUserComponent session={props.session} open={editUserOpen} onClose={closeEditDialog} user={openUser}/>
             <h2>Users of Guardio Life Insurance</h2>
             <Table
                 height={900}
                 data = {users}
-                onRowClick={rowData => {
-                    console.log(rowData);
-                }}
             >
                 <Column width={300} align="center" fixed>
                     <HeaderCell><h6>Id</h6></HeaderCell>
@@ -49,7 +48,7 @@ export default function ViewUserComponent(props) {
 
                 <Column width={200} align="center">
                     <HeaderCell><h6>User Name</h6></HeaderCell>
-                    <Cell dataKey="userName" />
+                    <Cell dataKey="username" />
                 </Column>
 
                 <Column width={200} align="center">
@@ -62,12 +61,12 @@ export default function ViewUserComponent(props) {
                     <Cell dataKey="email" />
                 </Column>
                 <Column width={80} align="center" fixed="right">
-                    <HeaderCell><h6>...</h6></HeaderCell>
+                    <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                     <Cell>
                         {rowData => (
                             <span>
-                                <a onClick={() => alert(`id:${rowData.id}`)}> Edit </a>
+                                <a onClick={() => onEditClick(rowData)} style={{cursor:'pointer'}}> Edit </a>
                             </span>
                         )}
                     </Cell>
