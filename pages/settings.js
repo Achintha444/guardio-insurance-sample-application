@@ -15,6 +15,7 @@ import LogoComponent from '../components/settingsComponents/logoComponent';
 import ViewUserComponent from '../components/settingsComponents/viewUserComponent';
 import { meDetails } from '../util/apiDecode';
 import AddUserComponent from '../components/settingsComponents/addUserComponent';
+import TempComp from '../components/settingsComponents/addUserComponent';
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
