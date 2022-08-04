@@ -13,11 +13,18 @@ export default function ViewUserComponent(props) {
 
     const [openUser, setOpenUser] = useState({});
 
-    useLayoutEffect(() => {
-        async function fetchData() {
-            const res1 = await usersDetails(props.session);
-            setUsers(res1);
+    const fetchData = async() => {
+        const res = await usersDetails(props.session);
+        setUsers(res);
+    }
+
+    useEffect(()=>{
+        if(!editUserOpen) {
+            fetchData()
         }
+    },[editUserOpen]);
+
+    useEffect(() => {    
         fetchData();
     },[props]);
 
@@ -35,7 +42,8 @@ export default function ViewUserComponent(props) {
     
     return (
         <div className={styles.tableMainPanelDiv}>
-            <EditUserComponent session={props.session} open={editUserOpen} onClose={closeEditDialog} user={openUser}/>
+            <EditUserComponent session={props.session} open={editUserOpen} 
+            onClose={closeEditDialog} user={openUser}/>
             <h2>Users of Guardio Life Insurance</h2>
             <Table
                 height={900}
