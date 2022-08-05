@@ -39,14 +39,6 @@ export default function EditUserComponent(props) {
         return errors;
     }
 
-    const onDatasSubmit = (response) => {
-        if (response) {
-
-        } else {
-
-        }
-    }
-
     const validate = values => {
         const errors = {}
         errors = nameValidate(values.name, errors);
@@ -67,7 +59,6 @@ export default function EditUserComponent(props) {
 
     const onSubmit = async (values ,form)=> {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        window.alert(JSON.stringify(values, 0, 2));
         editUserEncode(props.session, props.user.id, values.name, values.email,
             values.username)
             .then((response) => onDataSubmit(response, form))
