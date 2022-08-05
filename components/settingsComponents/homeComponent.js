@@ -22,8 +22,7 @@ export default function HomeComponent(props) {
 
     // fetchData();
 
-    useLayoutEffect(() => {
-        consoleLogDebug("HOME", "TEST");
+    useEffect(() => {
         async function fetchData() {
             const res = await meDetails(props.session);
             setMe(res);

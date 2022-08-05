@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../styles/Signin.module.css';
 import { Button, Dropdown, Form } from 'rsuite';
 import config from '../config.json';
+import Cookie from 'js-cookie';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
@@ -78,8 +79,11 @@ export default function signin(props) {
       return;
     }
     setShowError(LOADING_DISPLAY_NONE);
+
+    Cookie.set("orgId",subOrgId);
+
     //signIn("wso2is", { callbackUrl: "/settings" });
-    signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}?orgId=${subOrgId}`}, {org: subOrgId});
+    signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}`}, {org: subOrgId});
   }
 
   const showDropDownItems = () => {

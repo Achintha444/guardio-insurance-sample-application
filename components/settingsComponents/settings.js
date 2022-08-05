@@ -8,14 +8,15 @@ import config from '../../config.json';
 
 
 import "rsuite/dist/rsuite.min.css";
-import Logo from '../../components/logo/logo';
+import Logo from '../logo/logo';
 import { getSession, signOut, useSession } from 'next-auth/react';
-import HomeComponent from '../../components/settingsComponents/homeComponent';
-import LogoComponent from '../../components/settingsComponents/logoComponent';
-import ViewUserComponent from '../../components/settingsComponents/viewUserComponent';
+import HomeComponent from './homeComponent';
+import LogoComponent from './logoComponent';
+import ViewUserComponent from './viewUserComponent';
 import { meDetails } from '../../util/apiDecode';
-import AddUserComponent from '../../components/settingsComponents/addUserComponent';
-import IdentityProviders from "../../components/settingsComponents/identity-providers/identity-providers";
+import { orgSignout } from '../../util/util';
+import AddUserComponent from './addUserComponent';
+import IdentityProviders from "./identity-providers/identity-providers";
 import { checkAdmin, checkCustomization, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util';
 
 
@@ -46,7 +47,7 @@ export default function Settings(props) {
 
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
 
-    const signOutOnClick = () => signOut({ callbackUrl: "/" });
+    const signOutOnClick = () => orgSignout();
 
     const mainPanelComponenet = (activeKey, session) => {
         switch (activeKey) {

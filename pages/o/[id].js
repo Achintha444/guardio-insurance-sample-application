@@ -1,19 +1,39 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
-import Settings from './[settings]';
-import config from '../../config.json';
-import { redirect, getOrg, getOrgIdfromRouterQuery } from '../../util/util';
-import { getSession } from 'next-auth/react';
-import { getCookie, setCookie } from 'cookies-next';
-import cookie from "cookie";
 
+import config from '../../config.json';
+import { redirect, getOrg, getOrgIdfromRouterQuery, getRouterQuery,parseCookies } from '../../util/util';
+import { getSession } from 'next-auth/react';
+import Cookie from 'js-cookie';
+import Settings from '../../components/settingsComponents/settings';
+//import cookie from "cookie";
+
+// export async function getInitialProps(context){
+//   const cookies = parseCookies(req);
+
+// }
 
 export async function getServerSideProps(context) {
 
   const session = await getSession(context);
+  let setOrg = {};
 
   if (!session) {
     return redirect('/signin');
+  }
+
+  const cookies = parseCookies(context.req);
+  const subOrgId = cookies.orgId;
+
+  if (subOrgId == undefined) {
+    return redirect('/signin');
+  } else {
+    const routerQuery = context.query.id;
+    if (routerQuery != getRouterQuery(subOrgId)) {
+      return redirect('/404');
+    } else {
+      setOrg = getOrg(subOrgId);
+    }
   }
 
 
@@ -27,17 +47,17 @@ export async function getServerSideProps(context) {
   //   sessionStorage.setItem("routerQuery", "asdasd");
   // }
 
-  const routerQuery = context.query.id;
-  const currentOrgId = context.query.orgId;
-  let setOrg = {};
+  // const routerQuery = context.query.id;
+  // const currentOrgId = context.query.orgId;
+  // let setOrg = {};
 
-  let orgId = getOrgIdfromRouterQuery(routerQuery);
+  // let orgId = getOrgIdfromRouterQuery(routerQuery);
 
-  if(orgId==undefined){
-    return redirect('/404');
-  }
+  // if(orgId==undefined){
+  //   return redirect('/404');
+  // }
 
-  setOrg = getOrg(orgId);
+  // setOrg = getOrg(orgId);
 
   // // const cookies = res.cookies;
   // const currentOrgId = getCookie('orgId');

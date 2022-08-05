@@ -1,4 +1,7 @@
-import config from '../config.json'
+import config from '../config.json';
+import cookie from "cookie";
+import FrontCookie from 'js-cookie';
+import { signOut } from 'next-auth/react';
 
 function consoleLogInfo(title, message) {
     console.log(`\n INFO : ${title} : ${JSON.stringify(message, null, '\t')}`);
@@ -72,10 +75,20 @@ function redirect(path) {
 }
 
 function checkCustomization(colorTheme) {
-    return colorTheme=="blue" ? "rs-theme-dark" : "";
+    return colorTheme == "blue" ? "rs-theme-dark" : "";
+}
+
+function parseCookies(req) {
+    return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+}
+
+function orgSignout() {
+    FrontCookie.remove("orgId");
+    signOut({ callbackUrl: "/" });
 }
 
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
-    checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery, checkCustomization, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
+    checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery,
+    checkCustomization, parseCookies, orgSignout, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };
