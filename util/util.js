@@ -1,3 +1,5 @@
+import config from '../config.json'
+
 function consoleLogInfo(title, message) {
     console.log(`\n INFO : ${title} : ${JSON.stringify(message, null, '\t')}`);
 }
@@ -21,14 +23,30 @@ const LOADING_DISPLAY_BLOCK = {
     display: "block"
 };
 
-var login_org_id = "";
-
-function getLoginOrgId() {
-    return login_org_id;
+function getRouterQuery(orgid) {
+    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
+        if (config.SAMPLE_ORGS[i].id == orgid) {
+            return config.SAMPLE_ORGS[i].routerQuery;
+        }
+    }
 }
 
-function setLoginOrgId(orgId) {
-    login_org_id = orgId;
+function getOrg(orgId) {
+    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
+        if (config.SAMPLE_ORGS[i].id == orgId) {
+            return config.SAMPLE_ORGS[i];
+        }
+    }
+    return undefined;
+}
+
+function getOrgIdfromRouterQuery(routerQuery) {
+    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
+        if (config.SAMPLE_ORGS[i].routerQuery == routerQuery) {
+            return config.SAMPLE_ORGS[i].id;
+        }
+    }
+    return undefined;
 }
 
 function checkAdmin(scopes) {
@@ -53,8 +71,11 @@ function redirect(path) {
     }
 }
 
+function checkCustomization(colorTheme) {
+    return colorTheme=="blue" ? "rs-theme-dark" : "";
+}
 
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
-    getLoginOrgId, setLoginOrgId, checkAdmin,redirect, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
+    checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery, checkCustomization, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };

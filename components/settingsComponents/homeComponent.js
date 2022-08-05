@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Logo from '../logo/logo';
 import styles from '../../styles/Settings.module.css';
 import profileImage from '../../public/profile.svg'
+import "rsuite/dist/rsuite.min.css";
 
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { meDetails } from '../../util/apiDecode';
@@ -31,7 +32,6 @@ export default function HomeComponent(props) {
     }, [props]);
 
     return (
-
         <div className={styles.homeMainPanelDiv}>
             <Panel bordered>
                 <div className={styles.homePanel}>

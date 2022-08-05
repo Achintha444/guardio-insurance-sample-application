@@ -1,12 +1,12 @@
 import { getSession, signIn } from 'next-auth/react'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Signin.module.css';
 import { Button, Dropdown, Form } from 'rsuite';
 import config from '../config.json';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
-import { getLoginOrgId, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, setLoginOrgId, stringIsEmpty } from '../util/util';
+import { getRouterQuery, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, stringIsEmpty } from '../util/util';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -30,6 +30,10 @@ export async function getServerSideProps(context) {
 }
 
 export default function signin(props) {
+
+  useEffect(() => {
+    document.body.className = ""
+  }, []);
 
   const [subOrgId, setSubOrgId] = useState("");
   const [subOrgActive, setSubOrgActive] = useState(props.subOrgActiveInitList);
@@ -74,10 +78,8 @@ export default function signin(props) {
       return;
     }
     setShowError(LOADING_DISPLAY_NONE);
-    
-    setLoginOrgId(subOrgId);
     //signIn("wso2is", { callbackUrl: "/settings" });
-    signIn("wso2is",{ callbackUrl: "/settings"}, {org: subOrgId});
+    signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}?orgId=${subOrgId}`}, {org: subOrgId});
   }
 
   const showDropDownItems = () => {
