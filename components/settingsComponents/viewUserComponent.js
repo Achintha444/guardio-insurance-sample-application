@@ -50,6 +50,7 @@ export default function ViewUserComponent(props) {
             
             <Table
                 height={900}
+                width = {1150}
                 data = {users}
             >
                 <Column width={300} align="center" fixed>
@@ -71,7 +72,7 @@ export default function ViewUserComponent(props) {
                     <HeaderCell><h6>Email</h6></HeaderCell>
                     <Cell dataKey="email" />
                 </Column>
-                <Column width={80} align="center" fixed="right">
+                <Column width={150} align="center" fixed="right">
                     <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                     <Cell>
