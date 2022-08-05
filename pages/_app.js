@@ -1,6 +1,7 @@
 import { SessionProvider } from "next-auth/react"
 import Head from "next/head"
-import '../styles/globals.css'
+import '../styles/globals.css';
+import "rsuite/dist/rsuite.min.css";
 
 function MyApp({ Component, pageProps }) {
   return (

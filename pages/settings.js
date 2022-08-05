@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Panel, Placeholder } from 'rsuite';
+import { Button, Container, CustomProvider, Panel, Placeholder } from 'rsuite';
 import styles from '../styles/Settings.module.css';
 import { Sidenav, Nav } from 'rsuite';
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
@@ -46,7 +46,7 @@ export default function settings() {
     const { data: session, status } = useSession();
 
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
-    
+
     const signOutOnClick = () => signOut({ callbackUrl: "/" });
 
     const mainPanelComponenet = (activeKey, session) => {
@@ -68,6 +68,8 @@ export default function settings() {
     }
 
     return (
+        // <CustomProvider theme='dark'>
+
         <div className={styles.mainDiv}>
             <div className={styles.sideNavDiv}>
                 <Sidenav className={styles.sideNav} defaultOpenKeys={['3', '4']}>
@@ -96,5 +98,8 @@ export default function settings() {
             </div>
 
         </div>
+
+        // </CustomProvider>
+
     )
 }

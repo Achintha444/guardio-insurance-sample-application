@@ -22,15 +22,16 @@ export default function HomeComponent(props) {
     // fetchData();
 
     useLayoutEffect(() => {
-        consoleLogDebug("HOME","TEST");
+        consoleLogDebug("HOME", "TEST");
         async function fetchData() {
             const res = await meDetails(props.session);
             setMe(res);
         }
         fetchData();
-    },[props]);
+    }, [props]);
 
     return (
+
         <div className={styles.homeMainPanelDiv}>
             <Panel bordered>
                 <div className={styles.homePanel}>
@@ -66,9 +67,9 @@ function userDetailsBody(me) {
                 <p><b>Email : </b>{me.email}</p>
             </div>
             <div className={styles.profileImage}>
-                <Image src={profileImage}  alt="profile image"/>
+                <Image src={profileImage} alt="profile image" />
             </div>
-            
+
         </div>
     );
 }

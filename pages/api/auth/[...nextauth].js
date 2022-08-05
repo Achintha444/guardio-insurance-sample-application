@@ -20,9 +20,6 @@ export default NextAuth({
         }
       },
       profile(profile) {
-        consoleLogDebug('User Info',this.userinfo);
-        consoleLogInfo('profile', profile);
-        console.log("////////");
         return {
           id: profile.sub
         }
@@ -32,9 +29,6 @@ export default NextAuth({
   secret: process.env.SECRET,
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
-      consoleLogDebug('User jwt',user);
-      consoleLogDebug('Account',account);
-      consoleLogDebug('Token',token);
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token

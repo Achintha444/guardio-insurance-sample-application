@@ -19,26 +19,59 @@ export async function getServerSideProps(context) {
     }
   }
 
+  const org_list = config.SAMPLE_ORGS;
+  const subOrgActiveInitList = [];
+  org_list.map(() => subOrgActiveInitList.push(false));
+
   return {
-    props: { session }
+    props: { org_list, subOrgActiveInitList }
   }
 }
 
-export default function signin() {
+export default function signin(props) {
 
   const [subOrgId, setSubOrgId] = useState(0);
-  const [subOrgActive, setSubOrgActive] = useState(1);
+  const [subOrgActive, setSubOrgActive] = useState(props.subOrgActiveInitList);
   const [title, setTitle] = useState("Organization");
 
   let orgSelect = (event) => {
     setSubOrgId(event);
-    (event==config.WSO2IS_LIFE_ORG_ID) ? setSubOrgActive([true,false]) : setSubOrgActive([false,true]);
-    (event==config.WSO2IS_LIFE_ORG_ID) ? setTitle("Guardio Life Insurance") : setTitle("Guardio Vehicle Insurance");
-  } 
+    changeDropTitle(event);
+  }
+
+  const changeDropTitle = (event) => {
+    for (var i = 0; i < props.org_list.length; i++) {
+      if (props.org_list[i].id == event) {
+        setTitle(props.org_list[i].name);
+        setSubOrgActive(changeSubOrgActive(i));
+        break;
+      }
+    }
+  }
+
+  const changeSubOrgActive = (index) => {
+    const subOrgActiveCopy = subOrgActive;
+    subOrgActiveCopy[index] = true;
+    for (var i = 0; i < subOrgActiveCopy.length; i++) {
+      if (i == index) {
+        continue;
+      }
+      subOrgActiveCopy[i] = false;
+    }
+
+    return subOrgActiveCopy;
+  }
 
   let nextOnClick = (event) => {
-    signIn("wso2is",{ callbackUrl: "/settings"});
+    signIn("wso2is", { callbackUrl: "/settings" });
     //signIn("wso2is",{ callbackUrl: "/settings"}, {orgId: subOrgId});
+  }
+
+  const showDropDownItems = () => {
+    return props.org_list.map((org) => (
+      <Dropdown.Item key={org.id} eventKey={org.id} className={styles.signinDropdownItem}
+        onSelect={(event) => orgSelect(event)}>{org.name}</Dropdown.Item>
+    ));
   }
 
   return (
@@ -48,35 +81,18 @@ export default function signin() {
         <p className={styles.signinText}>Sign in</p>
         <p className={styles.signinTag}>Select your organization to proceed</p>
 
-        <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']} 
-          onSelect={(event)=>orgSelect(event)}>
+        <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']}
+          onSelect={(event) => orgSelect(event)}>
 
-          <Dropdown.Item active= {subOrgActive[0]} eventKey={config.WSO2IS_LIFE_ORG_ID} className={styles.signinDropdownItem} 
-          onSelect={(event) => orgSelect(event)}>Guardio Life Insurance</Dropdown.Item>
-          <Dropdown.Item active={subOrgActive[1]} eventKey={config.WSO2IS_VEH_ORG_ID} className={styles.signinDropdownItem} 
-          onSelect={(event) => orgSelect(event)}>Guardio Vehicle Insurance</Dropdown.Item>
+          {showDropDownItems()}
 
         </Dropdown>
 
         <div className={styles.buttonCarousell}>
-          <Button className={styles.nextButton} size="lg" appearance='primary' onClick={(event)=>nextOnClick(event)}>Next</Button>
+          <Button className={styles.nextButton} size="lg" appearance='primary' onClick={(event) => nextOnClick(event)}>Next</Button>
           <Button size="lg" appearance="link">Register</Button>
         </div>
       </div>
     </div>
   )
 }
-
-
-// export default class signin extends Component {
-
-//   constructor() {
-//     super();
-//   }
-
-  
-
-//   render() {
-  
-//   }
-// }
