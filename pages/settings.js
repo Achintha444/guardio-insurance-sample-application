@@ -80,7 +80,7 @@ export default function settings() {
                                 Dashboard
                             </Nav.Item>
                             <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}>
-                                <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>View Users</Nav.Item>
+                                <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Manage Users</Nav.Item>
                                 <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
                                 <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item>
                             </Nav.Menu>

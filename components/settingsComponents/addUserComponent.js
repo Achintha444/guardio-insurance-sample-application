@@ -6,6 +6,7 @@ import { addUserEncode } from '../../util/apiDecode';
 
 import styles from '../../styles/Settings.module.css';
 import SuccessDialog from '../util/successDialog';
+import SettingsTitle from '../util/settingsTitle';
 
 export default function AddUserComponent(props) {
 
@@ -93,8 +94,9 @@ export default function AddUserComponent(props) {
     return (
         <div className={styles.addUserMainDiv}>
             <SuccessDialog open={successDialogOpen} onClose={closeSuccessDialog} />
-
-            <h2>Add User</h2>
+            
+            <SettingsTitle title="Add User" subtitle="Add a new user to the organisation" / >
+            
             <div className={styles.addUserFormDiv}>
                 <Form
                     onSubmit={onSubmit}

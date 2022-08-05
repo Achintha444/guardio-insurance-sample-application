@@ -92,7 +92,7 @@
 .tableMainPanelDiv {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
     height: 100%;
 }
 
@@ -107,7 +107,7 @@
 .addUserMainDiv {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 32px;
 }
 
 .addUserFormDiv{
