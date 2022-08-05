@@ -16,6 +16,7 @@ import ViewUserComponent from '../components/settingsComponents/viewUserComponen
 import { meDetails } from '../util/apiDecode';
 import AddUserComponent from '../components/settingsComponents/addUserComponent';
 import IdentityProviders from "../components/settingsComponents/identity-providers/identity-providers";
+import { checkAdmin, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../util/util';
 
 
 export async function getServerSideProps(context) {
@@ -29,8 +30,6 @@ export async function getServerSideProps(context) {
             },
         }
     }
-
-    console.log(session.user);
 
     return {
         props: {
@@ -67,6 +66,14 @@ export default function settings() {
         setActiveKeySideNav(eventKey);
     }
 
+    const showSettingsSection = (scopes)=>{
+        if(checkAdmin(scopes)){
+            return LOADING_DISPLAY_BLOCK;
+        } else {
+            return LOADING_DISPLAY_NONE
+        }
+    }
+
     return (
         // <CustomProvider theme='dark'>
 
@@ -81,7 +88,8 @@ export default function settings() {
                             <Nav.Item eventKey="1" icon={<DashboardIcon />} onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
                                 Dashboard
                             </Nav.Item>
-                            <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}>
+                            <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}
+                                style={showSettingsSection(session.scope)}>
                                 <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Manage Users</Nav.Item>
                                 <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
                                 <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item>

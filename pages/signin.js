@@ -6,7 +6,7 @@ import config from '../config.json';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, stringIsEmpty } from '../util/util';
+import { getLoginOrgId, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, setLoginOrgId, stringIsEmpty } from '../util/util';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -46,6 +46,8 @@ export default function signin(props) {
     setShowError(LOADING_DISPLAY_NONE);
     for (var i = 0; i < props.org_list.length; i++) {
       if (props.org_list[i].id == event) {
+        setSubOrgId(props.org_list[i].id);
+        
         setTitle(props.org_list[i].name);
         setSubOrgActive(changeSubOrgActive(i));
         break;
@@ -72,6 +74,8 @@ export default function signin(props) {
       return;
     }
     setShowError(LOADING_DISPLAY_NONE);
+    
+    setLoginOrgId(subOrgId);
     signIn("wso2is", { callbackUrl: "/settings" });
     //signIn("wso2is",{ callbackUrl: "/settings"}, {orgId: subOrgId});
   }

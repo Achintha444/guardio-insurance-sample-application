@@ -1,5 +1,5 @@
 import NextAuth from "next-auth"
-import { consoleLogDebug, consoleLogInfo } from "../../../util/util";
+import { consoleLogDebug, consoleLogInfo, getLoginOrgId } from "../../../util/util";
 
 export default NextAuth({
 
@@ -29,16 +29,24 @@ export default NextAuth({
   secret: process.env.SECRET,
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser }) {
+      consoleLogDebug('token',token);
+      consoleLogDebug('user',user);
+      consoleLogDebug('account',account);
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token
+        token.scope = account.scope
       }
       return token
     },
     async session({ session, token, user }) {
-      consoleLogDebug('User session',user);
+     
       session.accessToken = token.accessToken
       session.idToken = token.idToken
+      session.scope = token.scope
+
+      consoleLogDebug('session',session);
+
       return session
     }
   },
