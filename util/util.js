@@ -14,4 +14,12 @@ function stringIsEmpty(str){
     return (str === "");
 }
 
-module.exports = { consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty  };
+const LOADING_DISPLAY_NONE = {
+    display: "none"
+};
+const LOADING_DISPLAY_BLOCK = {
+    display: "block"
+};
+
+
+module.exports = { consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK  };

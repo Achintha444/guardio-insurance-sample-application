@@ -1,11 +1,12 @@
 import { getSession, signIn } from 'next-auth/react'
 import React, { useState } from 'react';
 import styles from '../styles/Signin.module.css';
-import { Button, Dropdown } from 'rsuite';
+import { Button, Dropdown, Form } from 'rsuite';
 import config from '../config.json';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, stringIsEmpty } from '../util/util';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -30,9 +31,11 @@ export async function getServerSideProps(context) {
 
 export default function signin(props) {
 
-  const [subOrgId, setSubOrgId] = useState(0);
+  const [subOrgId, setSubOrgId] = useState("");
   const [subOrgActive, setSubOrgActive] = useState(props.subOrgActiveInitList);
   const [title, setTitle] = useState("Organization");
+
+  const [showError, setShowError] = useState(LOADING_DISPLAY_NONE);
 
   let orgSelect = (event) => {
     setSubOrgId(event);
@@ -40,6 +43,7 @@ export default function signin(props) {
   }
 
   const changeDropTitle = (event) => {
+    setShowError(LOADING_DISPLAY_NONE);
     for (var i = 0; i < props.org_list.length; i++) {
       if (props.org_list[i].id == event) {
         setTitle(props.org_list[i].name);
@@ -63,6 +67,11 @@ export default function signin(props) {
   }
 
   let nextOnClick = (event) => {
+    if (stringIsEmpty(subOrgId)) {
+      setShowError(LOADING_DISPLAY_BLOCK);
+      return;
+    }
+    setShowError(LOADING_DISPLAY_NONE);
     signIn("wso2is", { callbackUrl: "/settings" });
     //signIn("wso2is",{ callbackUrl: "/settings"}, {orgId: subOrgId});
   }
@@ -81,12 +90,18 @@ export default function signin(props) {
         <p className={styles.signinText}>Sign in</p>
         <p className={styles.signinTag}>Select your organization to proceed</p>
 
-        <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']}
-          onSelect={(event) => orgSelect(event)}>
+        <div className={styles.signinDropdownDiv}>
+          <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']}
+            onSelect={(event) => orgSelect(event)}>
 
-          {showDropDownItems()}
+            {showDropDownItems()}
 
-        </Dropdown>
+          </Dropdown>
+
+          <p style={showError}>Select an organization to proceed.</p>
+        </div>
+
+
 
         <div className={styles.buttonCarousell}>
           <Button className={styles.nextButton} size="lg" appearance='primary' onClick={(event) => nextOnClick(event)}>Next</Button>
