@@ -44,8 +44,17 @@ function checkAdmin(scopes) {
     return true;
 }
 
+function redirect(path) {
+    return {
+        redirect: {
+            destination: path,
+            permanent: false,
+        },
+    }
+}
+
 
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
-    getLoginOrgId, setLoginOrgId, checkAdmin, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
+    getLoginOrgId, setLoginOrgId, checkAdmin,redirect, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };

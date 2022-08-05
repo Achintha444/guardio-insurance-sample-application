@@ -76,8 +76,8 @@ export default function signin(props) {
     setShowError(LOADING_DISPLAY_NONE);
     
     setLoginOrgId(subOrgId);
-    signIn("wso2is", { callbackUrl: "/settings" });
-    //signIn("wso2is",{ callbackUrl: "/settings"}, {orgId: subOrgId});
+    //signIn("wso2is", { callbackUrl: "/settings" });
+    signIn("wso2is",{ callbackUrl: "/settings"}, {org: subOrgId});
   }
 
   const showDropDownItems = () => {

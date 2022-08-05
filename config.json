@@ -7,14 +7,14 @@
             "id" : "63cac8f4-c498-4c16-9b53-4fc41e84ee7b",
             "routerQuery":"best",
             "name": "Best Auto Mart",
-            "color-theme": "blue"
+            "colorTheme": "blue"
         },
     
        {
             "id" : "bdb5ccb1-c79b-46a1-afb7-78f4b1be7cc9",
             "routerQuery":"car",
             "name": "Car Traders",
-            "color-theme": "yellow"
+            "colorTheme": "yellow"
         }
     ],
 

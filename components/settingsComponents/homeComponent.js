@@ -38,7 +38,7 @@ export default function HomeComponent(props) {
                     <Logo fontSize={48} letterSpacing={-3} wordSpacing={`normal`} />
                     <p className={styles.nameTag}>A relationship for life </p>
                     <hr />
-                    <h4 className={styles.nameTag}>Life Insurance </h4>
+                    <h4 className={styles.nameTag}>{props.orgName}</h4>
                 </div>
             </Panel>
             <Panel header="User Details" bordered>
