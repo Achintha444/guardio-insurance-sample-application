@@ -19,26 +19,6 @@ import AddUserComponent from './addUserComponent';
 import IdentityProviders from "./identity-providers/identity-providers";
 import { checkAdmin, checkCustomization, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util';
 
-
-// export async function getServerSideProps(context) {
-//     const session = await getSession(context);
-
-//     if (!session) {
-//         return {
-//             redirect: {
-//                 destination: '/signin',
-//                 permanent: false,
-//             },
-//         }
-//     }
-
-//     return {
-//         props: {
-//             session: session,
-//         },
-//     }
-// }
-
 export default function Settings(props) {
 
     const SETTINGS_UI = "settings interface"

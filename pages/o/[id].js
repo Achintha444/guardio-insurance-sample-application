@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 
 import config from '../../config.json';
-import { redirect, getOrg, getOrgIdfromRouterQuery, getRouterQuery,parseCookies } from '../../util/util';
+import { redirect,emptySession, getOrg, getOrgIdfromRouterQuery, getRouterQuery,parseCookies } from '../../util/util';
 import { getSession } from 'next-auth/react';
 import Cookie from 'js-cookie';
 import Settings from '../../components/settingsComponents/settings';
@@ -18,9 +18,11 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let setOrg = {};
 
-  if (!session) {
-    return redirect('/signin');
-  }
+  emptySession(session);
+
+  // if (!session) {
+  //   return redirect('/signin');
+  // }
 
   const cookies = parseCookies(context.req);
   const subOrgId = cookies.orgId;
