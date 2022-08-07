@@ -75,7 +75,6 @@ export default function AddUserComponent(props) {
     const onDataSubmit = (response, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
-            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
             form.restart();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
