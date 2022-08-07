@@ -1,13 +1,16 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Modal, ButtonToolbar, Button, Loader } from 'rsuite';
+import { Modal, ButtonToolbar, Button, Loader, useToaster } from 'rsuite';
 import { Form, Field } from 'react-final-form';
 import FormSuite from 'rsuite/Form';
 import { editUserEncode } from '../../util/apiDecode';
+import { successTypeDialog, errorTypeDialog } from '../util/dialog';
 
 import styles from '../../styles/util.module.css';
 import stylesSettings from '../../styles/Settings.module.css';
 
 export default function EditUserComponent(props) {
+
+    const toaster = useToaster();
 
     const LOADING_DISPLAY_NONE = {
         display: "none"
@@ -50,10 +53,10 @@ export default function EditUserComponent(props) {
 
     const onDataSubmit = (response,form) => {
         if (response) {
-            //setSuccessDialogOpen(true);
+            successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
             props.onClose();
         } else {
-            
+            errorTypeDialog(toaster, "Error Occured", "Error occured while editing the user. Try again.");
         }
     }
 
