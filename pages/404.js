@@ -27,7 +27,7 @@ export default function Custom404() {
 
               <p style={{
                 textAlign: 'center'
-              }}>The page your searching seems to be missing. <br />You can go back, or contact our <a>Customer Service</a> team if you need any help</p>
+              }}><b>The page your searching seems to be missing.</b> <br />You can go back, or contact our <a>Customer Service</a> team if you need any help</p>
 
               <Button size='lg' appearance='ghost' onClick={goBack}>Go Back</Button>
 

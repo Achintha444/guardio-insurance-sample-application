@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Field, FORM_ERROR } from 'react-final-form'
-import { Button, ButtonToolbar, Loader } from 'rsuite';
+import { Button, ButtonToolbar, Loader, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
 import { addUserEncode } from '../../util/apiDecode';
+import { successTypeDialog, errorTypeDialog } from '../util/dialog';
 
 import styles from '../../styles/Settings.module.css';
 import SuccessDialog from '../util/successDialog';
@@ -22,6 +23,8 @@ export default function AddUserComponent(props) {
     const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+
+    const toaster = useToaster();
 
     const nameValidate = (name, errors) => {
         if (!name) {
@@ -69,18 +72,18 @@ export default function AddUserComponent(props) {
         return errors
     }
 
-    const onDataSubmit = (response,form) => {
+    const onDataSubmit = (response, form) => {
         if (response) {
-            setSuccessDialogOpen(true);
+            successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
+            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
             form.restart();
         } else {
-
+            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
         }
     }
 
-    const onSubmit = async (values ,form)=> {
+    const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        window.alert(JSON.stringify(values, 0, 2));
         addUserEncode(props.session, values.name, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
@@ -94,9 +97,9 @@ export default function AddUserComponent(props) {
     return (
         <div className={styles.addUserMainDiv}>
             <SuccessDialog open={successDialogOpen} onClose={closeSuccessDialog} />
-            
-            <SettingsTitle title="Add User" subtitle="Add a new user to the organisation" / >
-            
+
+            <SettingsTitle title="Add User" subtitle="Add a new user to the organisation" />
+
             <div className={styles.addUserFormDiv}>
                 <Form
                     onSubmit={onSubmit}
