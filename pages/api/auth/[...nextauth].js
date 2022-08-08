@@ -3,7 +3,9 @@ import { consoleLogDebug, consoleLogInfo, getLoginOrgId } from "../../../util/ut
 import config from '../../../config.json';
 import { switchOrg } from '../../../util/switchApiCall';
 
-export default NextAuth({
+//export default (req, res) => NextAuth(req, res, getOptions(req));
+
+export default (req, res) => NextAuth(req,res,{
 
   providers: [
     {
@@ -48,7 +50,7 @@ export default NextAuth({
       session.idToken = token.idToken
       session.scope = token.scope
 
-      await switchOrg(session.accessToken);
+      await switchOrg(req,session.accessToken);
 
       return session
     }

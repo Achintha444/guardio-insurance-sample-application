@@ -94,6 +94,7 @@ function redirect(path) {
 }
 
 function parseCookies(req) {
+    //var cookie1 = require('cookie');
     return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 

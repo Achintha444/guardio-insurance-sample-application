@@ -1,10 +1,18 @@
-import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
+import { consoleLogDebug, consoleLogError, consoleLogInfo, parseCookies } from "./util";
 import config from '../config.json';
-import Cookie from 'js-cookie';
+import JSCookie from 'js-cookie';
+import cookie from "cookie";
 
-const SWITCH_API_CALL = "`Switch API Call";
+const SWITCH_API_CALL = "Switch API Call";
 
-const subOrgId = Cookie.get("orgId");
+//var orgId = JSCookie.get("orgId");
+
+function setOrgId(request){
+    const cookies = parseCookies(request);
+    const subOrgId = cookies.orgId;
+
+    return subOrgId;
+}
 
 function getSwitchHeader() {
     const headers = {
@@ -17,32 +25,34 @@ function getSwitchHeader() {
 }
 //SYSTEM profile openid
 //'scope': `SYSTEM ${config.WSO2IS_SCOPES}`,
-function getSwitchBody(subOrgId, accessToken) {
+// 'switching_organization': "5c1a730c-97c1-4d78-b245-196031efa1db",
+function getSwitchBody(oId, accessToken) {
     const body = {
         'client_id': config.WSO2IS_CLIENT_ID,
         'grant_type': 'organization_switch',
         'scope': `SYSTEM profile openid`,
-        'switching_organization': subOrgId,
+        'switching_organization': oId,
         'token': accessToken
     }
     consoleLogDebug(SWITCH_API_CALL, new URLSearchParams(body));
     return body;
 }
 
-function getSwitchResponse(subOrgId, accessToken) {
+function getSwitchResponse(oId, accessToken) {
     const request = {
         method: 'POST',
         headers: getSwitchHeader(),
-        body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString()
+        body: new URLSearchParams(getSwitchBody(oId, accessToken)).toString()
     }
     consoleLogDebug(SWITCH_API_CALL,request)
     return request;
 }
 
-async function switchOrg(accessToken) {
+async function switchOrg(request,accessToken) {
+
     const res = await fetch(
         `${config.WSO2IS_HOST}/oauth2/token`,
-        getSwitchResponse(subOrgId, accessToken)
+        getSwitchResponse(setOrgId(request), accessToken)
     );
     const data = await res.json();
     consoleLogDebug(SWITCH_API_CALL, data);
