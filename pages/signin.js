@@ -83,7 +83,8 @@ export default function signin(props) {
     Cookie.set("orgId",subOrgId);
 
     //signIn("wso2is", { callbackUrl: "/settings" });
-    signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}`}, {org: subOrgId});
+    signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}`}, {orgId: subOrgId});
+    //signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}`});
   }
 
   const showDropDownItems = () => {

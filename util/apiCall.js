@@ -1,10 +1,13 @@
 import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
 import config from '../config.json';
+import Cookie from 'js-cookie';
 
-const API_CALL = "API CALL"
+const API_CALL = "API CALL";
 
 const POST_METHOD = "POST";
 const PATCH_METHOD = "PATCH";
+
+const subOrgId = Cookie.get("orgId");
 
 function sentDataHeader(session) {
     const headers = {
@@ -20,27 +23,30 @@ function getDataHeader(session) {
     const headers = {
         "accept": "application/scim+json",
         "authorization": "Bearer " + session.accessToken,
+        "access-control-allow-origin": "http://localhost:3000"
     }
 
     return { headers }
 }
 
 function getSentDataRequestOptions(session, method, body) {
-    const request =  {
+    const request = {
         method: method,
         headers: sentDataHeader(session),
         body: JSON.stringify(body)
     }
-    console.log(request);
     return request;
 }
+
+
 
 async function fetchMe(session) {
     consoleLogInfo(`session ${API_CALL}`, session);
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
+            // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Me`,
             getDataHeader(session)
         );
         const data = await res.json();
