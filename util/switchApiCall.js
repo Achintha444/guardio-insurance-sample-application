@@ -20,7 +20,7 @@ function getSwitchHeader() {
         "accept": "application/json",
         "content-type": "application/x-www-form-urlencoded",
         "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin": "http://localhost:3000"
+        "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
     }
     return headers;
 }

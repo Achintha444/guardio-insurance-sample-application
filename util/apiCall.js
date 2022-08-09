@@ -14,7 +14,7 @@ function sentDataHeader(session) {
         "accept": "application/scim+json",
         "content-type": "application/scim+json",
         "authorization": "Bearer " + session.accessToken,
-        "access-control-allow-origin": "http://localhost:3000"
+        "access-control-allow-origin": config.WSO2IS_CLIENT_URL
     }
     return headers;
 }
@@ -23,7 +23,7 @@ function getDataHeader(session) {
     const headers = {
         "accept": "application/scim+json",
         "authorization": "Bearer " + session.accessToken,
-        "access-control-allow-origin": "http://localhost:3000"
+        "access-control-allow-origin": config.WSO2IS_CLIENT_URL
     }
 
     return { headers }
