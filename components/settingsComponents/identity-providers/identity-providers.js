@@ -44,7 +44,7 @@ export default function IdentityProviders() {
                 session
             })
         if (res && res.identityProviders) {
-            setIdpList(identityProviders);
+            setIdpList(res.identityProviders);
         } else {
             setIdpList([]);
         }
