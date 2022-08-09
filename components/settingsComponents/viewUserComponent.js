@@ -6,6 +6,7 @@ import { fetchUsers } from '../../util/apiCall';
 import styles from '../../styles/Settings.module.css';
 import { consoleLogDebug } from '../../util/util';
 import EditUserComponent from '../editUser/editUserComponent';
+import SettingsTitle from '../util/settingsTitle';
 
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
@@ -44,9 +45,12 @@ export default function ViewUserComponent(props) {
         <div className={styles.tableMainPanelDiv}>
             <EditUserComponent session={props.session} open={editUserOpen} 
             onClose={closeEditDialog} user={openUser}/>
-            <h2>Users of Guardio Life Insurance</h2>
+
+            <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
+            
             <Table
                 height={900}
+                width = {1150}
                 data = {users}
             >
                 <Column width={300} align="center" fixed>
@@ -68,7 +72,7 @@ export default function ViewUserComponent(props) {
                     <HeaderCell><h6>Email</h6></HeaderCell>
                     <Cell dataKey="email" />
                 </Column>
-                <Column width={80} align="center" fixed="right">
+                <Column width={150} align="center" fixed="right">
                     <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                     <Cell>
@@ -79,6 +83,7 @@ export default function ViewUserComponent(props) {
                         )}
                     </Cell>
                 </Column>
+            
             </Table>
         </div>
 

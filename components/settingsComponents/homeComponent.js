@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Logo from '../logo/logo';
 import styles from '../../styles/Settings.module.css';
 import profileImage from '../../public/profile.svg'
+import "rsuite/dist/rsuite.min.css";
 
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { meDetails } from '../../util/apiDecode';
@@ -21,14 +22,13 @@ export default function HomeComponent(props) {
 
     // fetchData();
 
-    useLayoutEffect(() => {
-        consoleLogDebug("HOME","TEST");
+    useEffect(() => {
         async function fetchData() {
             const res = await meDetails(props.session);
             setMe(res);
         }
         fetchData();
-    },[props]);
+    }, [props]);
 
     return (
         <div className={styles.homeMainPanelDiv}>
@@ -37,7 +37,7 @@ export default function HomeComponent(props) {
                     <Logo fontSize={48} letterSpacing={-3} wordSpacing={`normal`} />
                     <p className={styles.nameTag}>A relationship for life </p>
                     <hr />
-                    <h4 className={styles.nameTag}>Life Insurance </h4>
+                    <h4 className={styles.nameTag}>{props.orgName}</h4>
                 </div>
             </Panel>
             <Panel header="User Details" bordered>
@@ -66,9 +66,9 @@ function userDetailsBody(me) {
                 <p><b>Email : </b>{me.email}</p>
             </div>
             <div className={styles.profileImage}>
-                <Image src={profileImage}  alt="profile image"/>
+                <Image src={profileImage} alt="profile image" />
             </div>
-            
+
         </div>
     );
 }

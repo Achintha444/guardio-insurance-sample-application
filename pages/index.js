@@ -7,20 +7,25 @@ import Logo from '../components/logo/logo'
 
 import "rsuite/dist/rsuite.min.css";
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 export default function Home() {
 
   const router = useRouter();
-  const signinOnClick = ()=>{
+  const signinOnClick = () => {
     router.push("/signin");
   }
-  
+
+  useEffect(() => {
+    document.body.className = ""
+  }, []);
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
 
         <div className={styles.homeImageDiv}>
-          <Image src={homeImage} className={styles.homeImage} alt="home image"/>
+          <Image src={homeImage} className={styles.homeImage} alt="home image" />
         </div>
 
         <div className={styles.signInDiv}>

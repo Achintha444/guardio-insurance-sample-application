@@ -1,44 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, CustomProvider, Panel, Placeholder } from 'rsuite';
-import styles from '../styles/Settings.module.css';
+import styles from '../../styles/Settings.module.css';
 import { Sidenav, Nav } from 'rsuite';
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-import config from '../config.json';
+import config from '../../config.json';
 
 
 import "rsuite/dist/rsuite.min.css";
-import Logo from '../components/logo/logo';
+import Logo from '../logo/logo';
 import { getSession, signOut, useSession } from 'next-auth/react';
-import HomeComponent from '../components/settingsComponents/homeComponent';
-import LogoComponent from '../components/settingsComponents/logoComponent';
-import ViewUserComponent from '../components/settingsComponents/viewUserComponent';
-import { meDetails } from '../util/apiDecode';
-import AddUserComponent from '../components/settingsComponents/addUserComponent';
-import IdentityProviders from "../components/settingsComponents/identity-providers/identity-providers";
-import { checkAdmin, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../util/util';
+import HomeComponent from './homeComponent';
+import LogoComponent from './logoComponent';
+import ViewUserComponent from './viewUserComponent';
+import { meDetails } from '../../util/apiDecode';
+import { orgSignout } from '../../util/util';
+import AddUserComponent from './addUserComponent';
+import IdentityProviders from "./identity-providers/identity-providers";
+import { checkAdmin, checkCustomization, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util';
 
-
-export async function getServerSideProps(context) {
-    const session = await getSession(context);
-
-    if (!session) {
-        return {
-            redirect: {
-                destination: '/signin',
-                permanent: false,
-            },
-        }
-    }
-
-    return {
-        props: {
-            session: session,
-        },
-    }
-}
-
-export default function settings() {
+export default function Settings(props) {
 
     const SETTINGS_UI = "settings interface"
 
@@ -46,18 +27,18 @@ export default function settings() {
 
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
 
-    const signOutOnClick = () => signOut({ callbackUrl: "/" });
+    const signOutOnClick = () => orgSignout();
 
     const mainPanelComponenet = (activeKey, session) => {
         switch (activeKey) {
             case '1':
-                return <HomeComponent session={session} />;
+                return <HomeComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-1':
-                return <ViewUserComponent session={session} />;
+                return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-2':
-                return <AddUserComponent session={session} />;
+                return <AddUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-3':
-                return <IdentityProviders session={session} />;
+                return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
 
         }
     }
@@ -66,22 +47,25 @@ export default function settings() {
         setActiveKeySideNav(eventKey);
     }
 
-    const showSettingsSection = (scopes)=>{
-        if(checkAdmin(scopes)){
+    const showSettingsSection = (scopes) => {
+        if (checkAdmin(scopes)) {
             return LOADING_DISPLAY_BLOCK;
         } else {
             return LOADING_DISPLAY_NONE
         }
     }
 
+    useEffect(() => {
+        document.body.className = checkCustomization(props.colorTheme)
+    }, []);
+    // rs-theme-dark classrs-theme-high-contrast
     return (
-        // <CustomProvider theme='dark'>
 
         <div className={styles.mainDiv}>
             <div className={styles.sideNavDiv}>
                 <Sidenav className={styles.sideNav} defaultOpenKeys={['3', '4']}>
                     <Sidenav.Header>
-                        <LogoComponent />
+                        <LogoComponent name={props.name} />
                     </Sidenav.Header>
                     <Sidenav.Body>
                         <Nav activeKey={activeKeySideNav}>
@@ -106,8 +90,6 @@ export default function settings() {
             </div>
 
         </div>
-
-        // </CustomProvider>
 
     )
 }
