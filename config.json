@@ -2,6 +2,8 @@
     "WSO2IS_HOST": "https://localhost:9443",
     "WSO2IS_TENANT_NAME": "carbon.super",
 
+    "WSO2IS_CLIENT_URL": "https://localhost:3000",
+
     "WSO2IS_CLIENT_ID": "BJMhVsxdCjE1hc4V4rMj2z2HLcsa",
     "WSO2IS_CLIENT_SECRET": "nVXOAjutnPnWETlDzgfbMmGPS0Ia",
     "WSO2IS_SCOPES": "openid email profile internal_login internal_user_mgt_view internal_user_mgt_list internal_user_mgt_update internal_user_mgt_delete internal_user_mgt_create",
@@ -19,8 +21,5 @@
             "name": "Car Traders",
             "colorTheme": "yellow"
         }
-    ],
-
-    "WSO2IS_VEH_ORG_ID": "63cac8f4-c498-4c16-9b53-4fc41e84ee7b",
-    "WSO2IS_LIFE_ORG_ID": "bdb5ccb1-c79b-46a1-afb7-78f4b1be7cc9"
+    ]
 }
