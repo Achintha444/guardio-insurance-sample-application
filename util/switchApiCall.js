@@ -16,6 +16,7 @@ function setOrgId(request){
 
 function getSwitchHeader() {
     const headers = {
+        "Authorization" : `Basic ${btoa(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`)}`,
         "accept": "application/json",
         "content-type": "application/x-www-form-urlencoded",
         "Access-Control-Allow-Credentials": true,
@@ -28,9 +29,8 @@ function getSwitchHeader() {
 // 'switching_organization': "5c1a730c-97c1-4d78-b245-196031efa1db",
 function getSwitchBody(oId, accessToken) {
     const body = {
-        'client_id': config.WSO2IS_CLIENT_ID,
         'grant_type': 'organization_switch',
-        'scope': `SYSTEM profile openid`,
+        'scope': config.WSO2IS_SCOPES,
         'switching_organization': oId,
         'token': accessToken
     }

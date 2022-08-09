@@ -5,7 +5,7 @@ import { switchOrg } from '../../../util/switchApiCall';
 
 //export default (req, res) => NextAuth(req, res, getOptions(req));
 
-export default (req, res) => NextAuth(req,res,{
+export default (req, res) => NextAuth(req, res, {
 
   providers: [
     {
@@ -15,7 +15,7 @@ export default (req, res) => NextAuth(req,res,{
       clientSecret: config.WSO2IS_CLIENT_SECRET,
       type: "oauth",
       wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
-      userinfo: config.WSO2IS_HOST+"/t/"+config.WSO2IS_TENANT_NAME+"/scim2/Me",
+      userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/scim2/Me",
       // wellKnown: process.env.WSO2IS_HOST + "/o/" + process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID + "/oauth2/token/.well-known/openid-configuration",
       // userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"/oauth2/userinfo",
       authorization: {
@@ -34,9 +34,9 @@ export default (req, res) => NextAuth(req,res,{
   callbacks: {
 
     async jwt({ token, user, account, profile, isNewUser }) {
-      consoleLogDebug('token',token);
-      consoleLogDebug('user',user);
-      consoleLogDebug('account',account);
+      consoleLogDebug('token', token);
+      consoleLogDebug('user', user);
+      consoleLogDebug('account', account);
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token
@@ -45,12 +45,13 @@ export default (req, res) => NextAuth(req,res,{
       return token
     },
     async session({ session, token, user }) {
-     
-      session.accessToken = token.accessToken
-      session.idToken = token.idToken
-      session.scope = token.scope
 
-      await switchOrg(req,session.accessToken);
+      const orgSession = await switchOrg(req, token.accessToken);
+
+      session.accessToken = orgSession.access_token
+      session.idToken = orgSession.id_token
+      session.scope = orgSession.scope
+      session.refreshToken = orgSession.refresh_token
 
       return session
     }
