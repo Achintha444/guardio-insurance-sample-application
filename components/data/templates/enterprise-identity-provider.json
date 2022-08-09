@@ -1,6 +1,6 @@
 {
   "category": "DEFAULT",
-  "description": "Enterprise login via standard protocols (OIDC and SAML 2.0)",
+  "description": "Enterprise login via standard OIDC protocol.",
   "displayOrder": 3,
   "id": "enterprise-idp",
   "idp": {

@@ -1,13 +1,15 @@
-import React, {useMemo, useState} from "react";
-import {Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack} from "rsuite";
+import React, {useEffect, useMemo, useState} from "react";
+import {Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack} from "rsuite";
 import AppSelectIcon from '@rsuite/icons/AppSelect';
+import Edit from '@rsuite/icons/Edit';
+import Trash from '@rsuite/icons/Trash';
 
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Google from "../../data/templates/google.json";
 import Facebook from "../../data/templates/facebook.json";
 import styles from "./idp.module.css";
 import config from "../../../config.json";
-import {createIdentityProvider} from "./api";
+import {createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders} from "./api";
 import {useSession} from "next-auth/react";
 
 const GOOGLE_ID = "google-idp";
@@ -29,6 +31,24 @@ export default function IdentityProviders() {
             Facebook,
         ];
     });
+
+    useEffect(() => {
+        fetchAllIdPs().finally();
+    }, []);
+
+    const fetchAllIdPs = async () => {
+        const res = await
+            listAllIdentityProviders({
+                limit: 10,
+                offset: 0,
+                session
+            })
+        if (res && res.identityProviders) {
+            setIdpList(identityProviders);
+        } else {
+            setIdpList([]);
+        }
+    };
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -80,7 +100,24 @@ export default function IdentityProviders() {
                 }
             ];
         } else {
-
+            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
+                {
+                    "key": "ClientId",
+                    "value": formValues.client_id.toString()
+                },
+                {
+                    "key": "ClientSecret",
+                    "value": formValues.client_secret.toString()
+                },
+                {
+                    "key": "callBackUrl",
+                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
+                },
+                {
+                    "key": "AdditionalQueryParameters",
+                    "value": "scope=email openid profile"
+                }
+            ];
         }
 
         model.federatedAuthenticators.authenticators[FIRST_ENTRY].isEnabled = true;
@@ -105,9 +142,15 @@ export default function IdentityProviders() {
             </Stack>
             <FlexboxGrid
                 style={{width: "100%", height: "60vh", marginTop: "24px"}}
-                justify="center"
-                align="middle">
-                {idpList.length === 0 ? <EmptyIdentityProviderList/> : <p>list</p>}
+                justify={idpList.length === 0 ? "center" : "start"}
+                align={idpList.length === 0 ? "middle" : "top"}>
+                {idpList.length === 0
+                    ? <EmptyIdentityProviderList/>
+                    : <IdentityProviderList
+                        fetchAllIdPs={fetchAllIdPs}
+                        idpList={idpList}
+                    />
+                }
             </FlexboxGrid>
             {
                 openAddModal && (
@@ -135,6 +178,44 @@ export default function IdentityProviders() {
     );
 
 }
+
+const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
+
+    const {data: session} = useSession();
+
+    const onIdPEditClick = (id) => {
+        alert("NOT IMPLEMENTED", id);
+    };
+
+    const onIdPDeleteClick = (id) => {
+        deleteIdentityProvider({id, session})
+            .finally(() => {
+                fetchAllIdPs().finally();
+            })
+    };
+
+
+    return (
+        <List className={styles.idp__list}>
+            {idpList.map(({id, name}) => (
+                <List.Item key={id} className={styles.idp__list__item}>
+                    <div>
+                        <p>{name}</p>
+                        <small>{id}</small>
+                    </div>
+                    <div>
+                        <IconButton icon={<Trash/>}
+                                    onClick={() => onIdPDeleteClick(id)}
+                                    appearance="subtle"/>
+                        <IconButton icon={<Edit/>}
+                                    onClick={() => onIdPEditClick(id)}
+                                    appearance="primary"/>
+                    </div>
+                </List.Item>
+            ))}
+        </List>
+    );
+};
 
 const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSelected}) => {
 
@@ -315,10 +396,44 @@ const GoogleIdentityProvider = ({onFormValuesChange, formValues}) => {
 
 };
 
-const EnterpriseIdentityProvider = () => {
+const EnterpriseIdentityProvider = ({onFormValuesChange, formValues}) => {
 
     return (
-        <p>enterprise</p>
+        <Form onChange={onFormValuesChange} formValue={formValues}>
+            <Form.Group controlId="application_name">
+                <Form.ControlLabel>Application Name</Form.ControlLabel>
+                <Form.Control name="application_name"/>
+                <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
+            </Form.Group>
+            <Form.Group controlId="client_id">
+                <Form.ControlLabel>Client ID</Form.ControlLabel>
+                <Form.Control name="client_id" type="text" autoComplete="off"/>
+                <Form.HelpText tooltip>Client ID is Required</Form.HelpText>
+            </Form.Group>
+            <Form.Group controlId="client_secret">
+                <Form.ControlLabel>Client Secret</Form.ControlLabel>
+                <Form.Control name="client_secret" type="password" autoComplete="off"/>
+                <Form.HelpText tooltip>Client Secret is Required</Form.HelpText>
+            </Form.Group>
+            <Form.Group controlId="authorization_endpoint_url">
+                <Form.ControlLabel>Authorization Endpoint URL</Form.ControlLabel>
+                <Form.Control name="authorization_endpoint_url" type="text"/>
+                <Form.HelpText tooltip>Authorization Endpoint URL is Required</Form.HelpText>
+            </Form.Group>
+            <Form.Group controlId="token_endpoint_url">
+                <Form.ControlLabel>Token Endpoint URL</Form.ControlLabel>
+                <Form.Control name="token_endpoint_url" type="text"/>
+                <Form.HelpText tooltip>Token Endpoint URL is Required</Form.HelpText>
+            </Form.Group>
+            <Form.Group controlId="certificate">
+                <Form.ControlLabel>IdP Certificate (PEM)</Form.ControlLabel>
+                <Form.Control name="certificate" type="text"/>
+                <Form.HelpText tooltip>
+                    WSO2 Identity Server will use this certificate to
+                    verify the signed responses from your external IdP.
+                </Form.HelpText>
+            </Form.Group>
+        </Form>
     );
 
 }
