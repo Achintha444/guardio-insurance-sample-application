@@ -65,7 +65,8 @@ async function fetchUsers(session) {
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
+            //`${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users`,
             getDataHeader(session)
         );
         const data = await res.json();
@@ -81,7 +82,8 @@ async function fetchUsers(session) {
 
 async function addUser(session, user) {
     const res = await fetch(
-        `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
+        // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users`,
+        `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users`,
         getSentDataRequestOptions(session, POST_METHOD, user)
     );
     const data = await res.json();
@@ -92,7 +94,8 @@ async function addUser(session, user) {
 
 async function editUser(session, id, user) {
     const res = await fetch(
-        `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users/${id}`,
+        // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Users/${id}`,
+        `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users/${id}`,
         getSentDataRequestOptions(session, PATCH_METHOD, user)
     );
     const data = await res.json();
