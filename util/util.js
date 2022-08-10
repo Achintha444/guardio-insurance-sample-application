@@ -63,7 +63,7 @@ function getOrgIdfromRouterQuery(routerQuery) {
 }
 
 function checkCustomization(colorTheme) {
-    return colorTheme == "blue" ? "rs-theme-dark" : "";
+    return colorTheme == "blue" ? "rs-theme-dark" : "rs-theme-high-contrast";
 }
 
 
