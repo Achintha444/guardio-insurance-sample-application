@@ -15,7 +15,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: '/settings',
+        destination: '/o',
         permanent: false,
       },
     }
@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function signin(props) {
+export default function Signin(props) {
 
   useEffect(() => {
     document.body.className = ""

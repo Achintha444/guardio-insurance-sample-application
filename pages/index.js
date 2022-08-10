@@ -32,7 +32,7 @@ export default function Home() {
           <Logo fontSize={72} letterSpacing={-3} wordSpacing={`normal`} />
           <p className={styles.nameTag}>A relationship for life </p>
           <hr />
-          <p className={styles.buttonTag}>Let's get your journey started. </p>
+          <p className={styles.buttonTag}>Let&apos;s get your journey started. </p>
           <Button className={styles.signInDivButton} size="lg" appearance='primary' onClick={signinOnClick}>Sign In</Button>
         </div>
 
