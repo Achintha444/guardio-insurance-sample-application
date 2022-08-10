@@ -44,7 +44,7 @@ async function fetchMe(session) {
     try {
         const res = await fetch(
             // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
-            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Me`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users/${session.userId}`,
             getDataHeader(session)
         );
         const data = await res.json();

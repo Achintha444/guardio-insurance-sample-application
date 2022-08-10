@@ -1,11 +1,11 @@
 import NextAuth from "next-auth"
-import { consoleLogDebug, consoleLogInfo, getLoginOrgId } from "../../../util/util";
+import { consoleLogDebug, getLoggedUserId, getLoginOrgId } from "../../../util/util";
 import config from '../../../config.json';
 import { switchOrg } from '../../../util/switchApiCall';
 
 //export default (req, res) => NextAuth(req, res, getOptions(req));
 
-export default (req, res) => NextAuth(req, res, {
+const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
   providers: [
     {
@@ -35,8 +35,7 @@ export default (req, res) => NextAuth(req, res, {
 
     async jwt({ token, user, account, profile, isNewUser }) {
       consoleLogDebug('token', token);
-      consoleLogDebug('user', user);
-      consoleLogDebug('account', account);
+      consoleLogDebug('profile', profile);
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token
@@ -52,9 +51,12 @@ export default (req, res) => NextAuth(req, res, {
       session.idToken = orgSession.id_token
       session.scope = orgSession.scope
       session.refreshToken = orgSession.refresh_token
+      session.userId = getLoggedUserId(session.idToken)
 
       return session
     }
   },
   debug: true,
 })
+
+export default wso2ISProvider;
