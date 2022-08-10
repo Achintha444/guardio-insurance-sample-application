@@ -2,6 +2,7 @@ import config from '../config.json';
 import cookie from "cookie";
 import FrontCookie from 'js-cookie';
 import { signOut } from 'next-auth/react';
+import { infoTypeDialog } from '../components/util/dialog';
 
 // Common Util
 
@@ -104,7 +105,7 @@ function orgSignout() {
 }
 
 function emptySession(session) {
-    if (!session) {
+    if (session == null || session == undefined) {
         return redirect('/signin');
     }
 }
@@ -113,7 +114,7 @@ function parseJwt(token) {
     return JSON.parse(Buffer.from(token.split('.')[1], 'base64'));
 }
 
-function getLoggedUserId(token){
+function getLoggedUserId(token) {
     return parseJwt(token).sub;
 }
 
