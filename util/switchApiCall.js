@@ -14,9 +14,15 @@ function setOrgId(request){
     return subOrgId;
 }
 
+function getBasicAuth(){
+    return Buffer.from(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`).toString('base64');
+}
+
+// "Authorization" : `Basic ${btoa(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`)}`,
 function getSwitchHeader() {
+    
     const headers = {
-        "Authorization" : `Basic ${btoa(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`)}`,
+        "Authorization" : `Basic ${getBasicAuth()}`,
         "accept": "application/json",
         "content-type": "application/x-www-form-urlencoded",
         "Access-Control-Allow-Credentials": true,
