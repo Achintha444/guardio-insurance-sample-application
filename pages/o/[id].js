@@ -18,7 +18,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let setOrg = {};
 
-  emptySession(session);
+  return emptySession(session);
 
   // if (!session) {
   //   return redirect('/signin');

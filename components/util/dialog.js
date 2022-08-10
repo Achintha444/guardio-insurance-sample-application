@@ -25,4 +25,8 @@ function errorTypeDialog(toaster, header, body) {
     showDialog(toaster,'error',header,body);
 }
 
-module.exports = { successTypeDialog, errorTypeDialog }
+function infoTypeDialog(toaster, header, body) {
+    showDialog(toaster,'info',header,body);
+}
+
+module.exports = { successTypeDialog, errorTypeDialog, infoTypeDialog }
