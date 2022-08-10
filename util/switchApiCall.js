@@ -56,14 +56,19 @@ function getSwitchResponse(oId, accessToken) {
 
 async function switchOrg(request,accessToken) {
 
-    const res = await fetch(
-        `${config.WSO2IS_HOST}/oauth2/token`,
-        getSwitchResponse(setOrgId(request), accessToken)
-    );
-    const data = await res.json();
-    consoleLogDebug(SWITCH_API_CALL, data);
-
-    return data;
+    try {
+        const res = await fetch(
+            `${config.WSO2IS_HOST}/oauth2/token`,
+            getSwitchResponse(setOrgId(request), accessToken)
+        );
+        const data = await res.json();
+        consoleLogDebug(SWITCH_API_CALL, data);
+    
+        return data;
+    } catch(err){
+        consoleLogError(SWITCH_API_CALL,err);
+        return null;
+    }
 }
 
 module.exports = { switchOrg };

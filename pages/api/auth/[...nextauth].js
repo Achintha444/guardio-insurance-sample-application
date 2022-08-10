@@ -47,11 +47,15 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
       const orgSession = await switchOrg(req, token.accessToken);
 
-      session.accessToken = orgSession.access_token
-      session.idToken = orgSession.id_token
-      session.scope = orgSession.scope
-      session.refreshToken = orgSession.refresh_token
-      session.userId = getLoggedUserId(session.idToken)
+      if(!orgSession){
+        session.error = true;
+      } else {
+        session.accessToken = orgSession.access_token
+        session.idToken = orgSession.id_token
+        session.scope = orgSession.scope
+        session.refreshToken = orgSession.refresh_token
+        session.userId = getLoggedUserId(session.idToken)
+      }
 
       return session
     }
