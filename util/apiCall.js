@@ -38,8 +38,6 @@ function getSentDataRequestOptions(session, method, body) {
     return request;
 }
 
-
-
 async function fetchMe(session) {
     consoleLogInfo(`session ${API_CALL}`, session);
 
