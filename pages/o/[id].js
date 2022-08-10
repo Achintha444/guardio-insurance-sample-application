@@ -33,7 +33,10 @@ export async function getServerSideProps(context) {
     const routerQuery = context.query.id;
     if (routerQuery != getRouterQuery(subOrgId)) {
       return redirect('/404');
-    } else {
+    } else if(session.error){
+      return redirect('/500');
+    } 
+    else {
       setOrg = getOrg(subOrgId);
     }
   }

@@ -23,7 +23,7 @@ export default function Custom404() {
 
             <div className={style.errorMainDiv}>
 
-              <Image src={errorImage} width={600} />
+              <Image src={errorImage} width={600} alt="404 image"/>
 
               <p style={{
                 textAlign: 'center'

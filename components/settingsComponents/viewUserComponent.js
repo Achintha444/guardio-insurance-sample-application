@@ -27,7 +27,7 @@ export default function ViewUserComponent(props) {
 
     useEffect(() => {    
         fetchData();
-    },[props]);
+    },[props.session]);
 
     const { Column, HeaderCell, Cell } = Table;
 

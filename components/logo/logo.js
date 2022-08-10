@@ -15,7 +15,12 @@ export default function Logo(props) {
                 }}>
                     Guardio
                 </span>
-                Insurance
+                <span style={{
+                    color: `#a5a9b2`
+                }}>
+                    Insurance
+                </span>
+
             </h1>
         </div>
     )

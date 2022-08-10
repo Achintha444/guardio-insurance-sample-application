@@ -63,7 +63,7 @@ function getOrgIdfromRouterQuery(routerQuery) {
 }
 
 function checkCustomization(colorTheme) {
-    return colorTheme == "blue" ? "rs-theme-dark" : "";
+    return colorTheme == "blue" ? "rs-theme-dark" : "rs-theme-high-contrast";
 }
 
 
@@ -109,10 +109,19 @@ function emptySession(session) {
     }
 }
 
+function parseJwt(token) {
+    return JSON.parse(Buffer.from(token.split('.')[1], 'base64'));
+}
+
+function getLoggedUserId(token){
+    return parseJwt(token).sub;
+}
+
 // --
 
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
     checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery,
-    checkCustomization, parseCookies, orgSignout, emptySession, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
+    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId,
+    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };
