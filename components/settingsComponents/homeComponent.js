@@ -60,9 +60,9 @@ function userDetailsBody(me) {
     return (
         <div className={styles.userDetails}>
             <div className={styles.userDetailsBody}>
+                <p><b>First Name : </b>{me.name}</p>
                 <p><b>ID : </b>{me.id}</p>
                 <p><b>Username : </b>{me.username}</p>
-                <p><b>Name : </b>{me.name}</p>
                 <p><b>Email : </b>{me.email}</p>
             </div>
             <div className={styles.profileImage}>

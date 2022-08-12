@@ -14,45 +14,50 @@ export default function ViewUserComponent(props) {
 
     const [openUser, setOpenUser] = useState({});
 
-    const fetchData = async() => {
+    const fetchData = async () => {
         const res = await usersDetails(props.session);
         setUsers(res);
     }
 
-    useEffect(()=>{
-        if(!editUserOpen) {
+    useEffect(() => {
+        if (!editUserOpen) {
             fetchData()
         }
-    },[editUserOpen]);
+    }, [editUserOpen]);
 
-    useEffect(() => {    
+    useEffect(() => {
         fetchData();
-    },[props.session]);
+    }, [props.session]);
 
     const { Column, HeaderCell, Cell } = Table;
 
     const closeEditDialog = () => {
         setOpenUser({});
         setEditUserOpen(false);
-    } 
+    }
 
-    const onEditClick = (user)=>{
+    const onEditClick = (user) => {
         setOpenUser(user);
         setEditUserOpen(true);
     }
-    
+
     return (
         <div className={styles.tableMainPanelDiv}>
-            <EditUserComponent session={props.session} open={editUserOpen} 
-            onClose={closeEditDialog} user={openUser}/>
+            <EditUserComponent session={props.session} open={editUserOpen}
+                onClose={closeEditDialog} user={openUser} />
 
             <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
-            
+
             <Table
                 height={900}
-                width = {1150}
-                data = {users}
+                width={1150}
+                data={users}
             >
+                <Column width={200} align="center">
+                    <HeaderCell><h6>First Name</h6></HeaderCell>
+                    <Cell dataKey="name" />
+                </Column>
+
                 <Column width={300} align="center" fixed>
                     <HeaderCell><h6>Id</h6></HeaderCell>
                     <Cell dataKey="id" />
@@ -61,11 +66,6 @@ export default function ViewUserComponent(props) {
                 <Column width={200} align="center">
                     <HeaderCell><h6>User Name</h6></HeaderCell>
                     <Cell dataKey="username" />
-                </Column>
-
-                <Column width={200} align="center">
-                    <HeaderCell><h6>Name</h6></HeaderCell>
-                    <Cell dataKey="name" />
                 </Column>
 
                 <Column width={300} align="center">
@@ -78,12 +78,12 @@ export default function ViewUserComponent(props) {
                     <Cell>
                         {rowData => (
                             <span>
-                                <a onClick={() => onEditClick(rowData)} style={{cursor:'pointer'}}> Edit </a>
+                                <a onClick={() => onEditClick(rowData)} style={{ cursor: 'pointer' }}> Edit </a>
                             </span>
                         )}
                     </Cell>
                 </Column>
-            
+
             </Table>
         </div>
 
