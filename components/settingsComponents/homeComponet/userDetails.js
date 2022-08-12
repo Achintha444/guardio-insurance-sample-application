@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../../styles/Settings.module.css' ;
 import profileImage from '../../../public/profile.svg';
-import Image from 'next/image'
+import Image from 'next/image';
 
 export default function UserDetails(props) {
     return (

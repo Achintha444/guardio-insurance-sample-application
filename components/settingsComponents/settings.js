@@ -17,7 +17,7 @@ import { meDetails } from '../../util/apiDecode';
 import { orgSignout } from '../../util/util';
 import AddUserComponent from './addUserComponent';
 import IdentityProviders from "./identity-providers/identity-providers";
-import { checkAdmin, checkCustomization, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util';
+import { checkCustomization,hideBasedOnScopes } from '../../util/util';
 
 export default function Settings(props) {
 
@@ -47,14 +47,6 @@ export default function Settings(props) {
         setActiveKeySideNav(eventKey);
     }
 
-    const showSettingsSection = (scopes) => {
-        if (checkAdmin(scopes)) {
-            return LOADING_DISPLAY_BLOCK;
-        } else {
-            return LOADING_DISPLAY_NONE
-        }
-    }
-
     useEffect(() => {
         document.body.className = checkCustomization(props.colorTheme)
     }, [props.colorTheme]);
@@ -73,7 +65,7 @@ export default function Settings(props) {
                                 Dashboard
                             </Nav.Item>
                             <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}
-                                style={showSettingsSection(session.scope)}>
+                                style={hideBasedOnScopes(session.scope)}>
                                 <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Manage Users</Nav.Item>
                                 <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
                                 <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item>

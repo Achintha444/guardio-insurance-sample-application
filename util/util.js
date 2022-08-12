@@ -44,6 +44,14 @@ const LOADING_DISPLAY_BLOCK = {
     display: "block"
 };
 
+function hideBasedOnScopes(scopes) {
+    if (checkAdmin(scopes)) {
+        return LOADING_DISPLAY_BLOCK;
+    } else {
+        return LOADING_DISPLAY_NONE
+    }
+}
+
 // ----
 
 // Organization object realted util
@@ -134,6 +142,6 @@ function getLoggedUserId(token) {
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
     checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery,
-    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId, getCurrentDate,
+    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId, getCurrentDate, hideBasedOnScopes,
     LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };

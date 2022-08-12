@@ -10,7 +10,7 @@ import  image4  from '../../../public/news4.jpeg';
 export default function NewsComponent(props) {
     return (
         <div>
-            <Panel bordered>
+            <Panel>
                 <Image src={selectImage()} height={800} width={1000}/>
                 <p><br /></p>
                 <p>{getCurrentDate()}</p>
