@@ -14,6 +14,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       clientId: config.WSO2IS_CLIENT_ID,
       clientSecret: config.WSO2IS_CLIENT_SECRET,
       type: "oauth",
+      secret: process.env.SECRET,
       wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
       userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/scim2/Me",
       // wellKnown: process.env.WSO2IS_HOST + "/o/" + process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID + "/oauth2/token/.well-known/openid-configuration",
