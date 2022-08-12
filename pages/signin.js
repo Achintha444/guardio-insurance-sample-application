@@ -52,7 +52,7 @@ export default function Signin(props) {
     for (var i = 0; i < props.org_list.length; i++) {
       if (props.org_list[i].id == event) {
         setSubOrgId(props.org_list[i].id);
-        
+
         setTitle(props.org_list[i].name);
         setSubOrgActive(changeSubOrgActive(i));
         break;
@@ -80,10 +80,10 @@ export default function Signin(props) {
     }
     setShowError(LOADING_DISPLAY_NONE);
 
-    Cookie.set("orgId",subOrgId);
+    Cookie.set("orgId", subOrgId);
 
     //signIn("wso2is", { callbackUrl: "/settings" });
-    signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}`}, {orgId: subOrgId});
+    signIn("wso2is", { callbackUrl: `/o/${getRouterQuery(subOrgId)}` }, { orgId: subOrgId });
     //signIn("wso2is",{ callbackUrl: `/o/${getRouterQuery(subOrgId)}`});
   }
 
@@ -98,8 +98,10 @@ export default function Signin(props) {
     <div className={styles.signinOuter}>
       <div className={styles.signinInner}>
         <Logo fontSize={28} letterSpacing={-2} wordSpacing={-3} />
-        <p className={styles.signinText}>Sign in</p>
-        <p className={styles.signinTag}>Select your organization to proceed</p>
+        <div className={styles.signInTextDiv}>
+          <p className={styles.signinText}>Sign in</p>
+          <p className={styles.signinTag}>Select your organization to proceed</p>
+        </div>
 
         <div className={styles.signinDropdownDiv}>
           <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']}
@@ -111,8 +113,6 @@ export default function Signin(props) {
 
           <p style={showError}>Select an organization to proceed.</p>
         </div>
-
-
 
         <div className={styles.buttonCarousell}>
           <Button className={styles.nextButton} size="lg" appearance='primary' onClick={(event) => nextOnClick(event)}>Next</Button>

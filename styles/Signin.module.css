@@ -14,22 +14,30 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
-    padding: 80px 0;
-    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.05)
+    padding: 10px 0;
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.05);
+    gap: 30px;
+}
+
+.signInTextDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: -15px;
 }
 
 .signinText {
     font-size: 26px;
     position: relative;
-    top: -30px;
 }
 
 .signinTag {
     font-size: 16px;
     position: relative;
-    top: -70px
 }
 
 .signinDropdownDiv {
@@ -38,10 +46,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    gap: 0
+    gap: 0;
+    margin-top: 2rem;
 }
 
-.signinDropdownDiv p{
+.signinDropdownDiv p {
     font-size: 16px;
     position: relative;
     top: -35px;
@@ -80,4 +89,61 @@
 
 .nextButton {
     width: 30%
+}
+
+@media (max-width: 1300px) {
+    .signinInner {
+        height: 35vw;
+        width: 40vw;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1140px) {
+    .signinInner {
+        height: 45vw;
+        width: 50vw;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .signinInner {
+        height: 45vw;
+        width: 50vw;
+        gap: 30px;
+    }
+    .signInTextDiv {
+        top: -17px;
+    }
+
+    .signinText {
+        font-size: 22px;
+    }
+
+    .signinTag {
+        font-size: 14px;
+    }
+
+    .signinDropdownDiv {
+        width: 55%;
+        margin-top: 1.6rem;
+    }
+
+    .signinDropdownDiv p {
+        font-size: 14px;
+        top: -35px;
+        text-align: center;
+    }
+
+    .buttonCarousell {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        width: 70%
+    }
+
+    .nextButton {
+        width: 30%
+    }
 }
