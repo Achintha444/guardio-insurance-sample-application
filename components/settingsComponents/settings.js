@@ -10,7 +10,7 @@ import config from '../../config.json';
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../logo/logo';
 import { getSession, signOut, useSession } from 'next-auth/react';
-import HomeComponent from './homeComponent';
+import HomeComponent from './homeComponet/homeComponent';
 import LogoComponent from './logoComponent';
 import ViewUserComponent from './viewUserComponent';
 import { meDetails } from '../../util/apiDecode';

@@ -22,6 +22,17 @@ function stringIsEmpty(str) {
     return (str === "");
 }
 
+function getCurrentDate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    today = mm + '/' + dd + '/' + yyyy;
+
+    return today;
+}
+
 // ----
 
 // Front end Util
@@ -123,6 +134,6 @@ function getLoggedUserId(token) {
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
     checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery,
-    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId,
+    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId, getCurrentDate,
     LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };
