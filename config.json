@@ -2,7 +2,7 @@
     "WSO2IS_HOST": "https://localhost:9443",
     "WSO2IS_TENANT_NAME": "carbon.super",
 
-    "WSO2IS_CLIENT_URL": "https://localhost:3000",
+    "WSO2IS_CLIENT_URL": "http://localhost:3000",
 
     "WSO2IS_CLIENT_ID": "Cl9yFmPOxoTDYd74yryUNx9qJGwa",
     "WSO2IS_CLIENT_SECRET": "GazfJgFqzUoVGjCfNijW9bieTSwa",

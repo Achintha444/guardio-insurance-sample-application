@@ -11,8 +11,9 @@ export default async function me(req , res) {
         
     }
 
-    const session = req.body.session;
-    const subOrgId = req.body.subOrgId;
+    const body = JSON.parse(req.body);
+    const session = body.session;
+    const subOrgId = body.subOrgId;
 
     try {
         const fetchData = await fetch(
@@ -22,12 +23,8 @@ export default async function me(req , res) {
         );
         const meData = await fetchData.json();
 
-        consoleLogDebug(`${API} me`, meData);
-
         res.status(200).json(meData);
     } catch (err) {
-        consoleLogError(`${API} me`, err);
-
-        res.status(404).json(meData);
+        res.status(404).json('meData');
     }
 }
