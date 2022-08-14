@@ -1,7 +1,7 @@
 import config from '../../config.json';
-import RequestMethod from './requestMethod';
+import { RequestMethod } from './requestMethod';
 
-function getInteralApibBody(session, subOrgId) {
+function getInternalApibBody(session, subOrgId) {
     const body = {
         session: session,
         subOrgId: subOrgId
@@ -9,12 +9,12 @@ function getInteralApibBody(session, subOrgId) {
     return body;
 }
 
-function getInteralApiRequestOptions(session, subOrgId) {
+function getInternalApiRequestOptions(session, subOrgId) {
     const request = {
         method: RequestMethod.POST,
-        body: getInteralApibBody(session, subOrgId)
+        body: JSON.stringify(getInternalApibBody(session, subOrgId))
     }
     return request;
 }
 
-module.exports = { getInteralApiRequestOptions }
+module.exports = { getInternalApiRequestOptions }
