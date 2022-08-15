@@ -12,7 +12,7 @@ export const createIdentityProvider = async ({model, session}) => {
                     "Accept": "application/json",
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
             },
         );
@@ -34,7 +34,7 @@ export const listAllIdentityProviders = async ({limit, offset, session}) => {
             {
                 headers: {
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
             },
         );
@@ -55,7 +55,7 @@ export const deleteIdentityProvider = async ({id, session}) => {
                 method: "DELETE",
                 headers: {
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
             },
         );
@@ -77,7 +77,7 @@ export const getDetailedIdentityProvider = async ({id, session}) => {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
             },
         );

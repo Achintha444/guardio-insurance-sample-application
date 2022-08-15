@@ -4,6 +4,7 @@ import {getApplicationDetails, listApplications, patchApplication} from "./api";
 import {useSession} from "next-auth/react";
 import Trash from '@rsuite/icons/Trash';
 import Plus from '@rsuite/icons/Plus';
+import config from '../../../config.json';
 
 import styles from "./app.module.css";
 import {getDetailedIdentityProvider, listAllIdentityProviders} from "../identity-providers/api";
@@ -46,7 +47,7 @@ export default function Application() {
                 // `clientId` for OIDC and `issuer` for SAML
                 const app = res.applications.find((app) => app &&
                     app["inboundKey"] &&
-                    app["inboundKey"] === "vA9fTQQoHjWVdTpl7Q84wnoQp0Qa"
+                    app["inboundKey"] === config.WSO2IS_CLIENT_ID
                 );
 
                 const detail = await getApplicationDetails({

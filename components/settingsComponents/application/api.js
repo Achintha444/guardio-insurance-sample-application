@@ -14,7 +14,7 @@ export const listApplications = async ({limit, offset, filter = null, session}) 
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
             },
         );
@@ -40,7 +40,7 @@ export const getApplicationDetails = async ({id, session}) => {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
             },
         );
@@ -62,7 +62,7 @@ export const patchApplication = async ({id, partial, session}) => {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + session.accessToken,
-                    "Access-Control-Allow-Origin": "http://localhost:3000"
+                    "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 },
                 body: JSON.stringify(partial)
             },

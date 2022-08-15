@@ -37,12 +37,11 @@ export default function IdentityProviders() {
     }, []);
 
     const fetchAllIdPs = async () => {
-        const res = await
-            listAllIdentityProviders({
-                limit: 10,
-                offset: 0,
-                session
-            })
+        const res = await listAllIdentityProviders({
+            limit: 10,
+            offset: 0,
+            session
+        });
         if (res && res.identityProviders) {
             setIdpList(res.identityProviders);
         } else {
@@ -195,8 +194,8 @@ const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
 
     const {data: session} = useSession();
 
-    const onIdPEditClick = (id) => {
-        alert("NOT IMPLEMENTED", id);
+    const onIdPEditClick = (ignoredId) => {
+        alert("NOT IMPLEMENTED");
     };
 
     const onIdPDeleteClick = (id) => {
@@ -231,10 +230,6 @@ const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
 
 const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSelected}) => {
 
-    const handleClose = () => {
-        onClose();
-    };
-
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
             return "google.svg";
@@ -250,8 +245,8 @@ const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSele
 
     return (
         <Modal open={openModal}
-               onClose={handleClose}
-               onBackdropClick={handleClose}>
+               onClose={onClose}
+               onBackdropClick={onClose}>
             <Modal.Header>
                 <Modal.Title>Select Identity Provider</Modal.Title>
                 <p>Choose one of the following identity providers.</p>
@@ -359,8 +354,6 @@ const IdPCreationModal = ({openModal, onSave, onCancel, template}) => {
     );
 
 };
-
-// --
 
 const FacebookIdentityProvider = ({onFormValuesChange, formValues}) => {
 
