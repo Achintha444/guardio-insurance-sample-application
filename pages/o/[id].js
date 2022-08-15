@@ -18,8 +18,12 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let setOrg = {};
 
-  if(!session){
+  if(session == null || session == undefined){
     return emptySession(session);
+  }
+
+  if(session.expires){
+    return redirect('/500');
   }
 
   // if (!session) {

@@ -39,21 +39,20 @@ function getSentDataRequestOptions(session, method, body) {
 }
 
 async function fetchMe(session) {
-    consoleLogInfo(`session ${API_CALL}`, session);
-
     try {
-        const res = await fetch(
-            // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
-            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users/${session.userId}`,
-            getDataHeader(session)
-        );
-        const data = await res.json();
-        consoleLogDebug(`${API_CALL} me`, data);
-
+        var data = "";
+        if (session.user == null) {
+            const res = await fetch(
+                // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
+                `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users/${session.userId}`,
+                getDataHeader(session)
+            );
+            data = await res.json();
+        } else {
+            data = session.user;
+        }
         return data;
     } catch (err) {
-        consoleLogError(`${API_CALL} me`, err);
-
         return null;
     }
 }

@@ -137,11 +137,42 @@ function getLoggedUserId(token) {
     return parseJwt(token).sub;
 }
 
+function getLoggedUser(token) {
+    const jwtParse = parseJwt(token);
+    const user = {};
+
+    try {
+        user.id = jwtParse.sub;
+        user.name = { "givenName": jwtParse.given_name };
+        user.emails = [jwtParse.email];
+        user.userName = jwtParse.username;
+
+        return user;
+    } catch (err) {
+        return null
+    }
+}
+
+function getLoggedUserFromProfile(profile){
+    const user = {};
+    try {
+        user.id = profile.sub;
+        user.name = { "givenName": profile.given_name };
+        user.emails = [profile.email];
+        user.userName = profile.username;
+
+        return user;
+    } catch (err) {
+        return null
+    }
+}
+
 // --
 
 module.exports = {
     consoleLogInfo, consoleLogDebug, consoleLogError, stringIsEmpty,
     checkAdmin, redirect, getRouterQuery, getOrg, getOrgIdfromRouterQuery,
-    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId, getCurrentDate, hideBasedOnScopes,
+    checkCustomization, parseCookies, orgSignout, emptySession, getLoggedUserId,
+    getCurrentDate, hideBasedOnScopes, getLoggedUser, getLoggedUserFromProfile,
     LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
 };

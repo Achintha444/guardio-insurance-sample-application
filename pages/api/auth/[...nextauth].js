@@ -1,5 +1,5 @@
 import NextAuth from "next-auth"
-import { consoleLogDebug, getLoggedUserId, getLoginOrgId } from "../../../util/util";
+import { consoleLogDebug, getLoggedUserId, getLoginOrgId,getLoggedUser,getLoggedUserFromProfile } from "../../../util/util";
 import config from '../../../config.json';
 import { switchOrg } from '../../../util/switchApiCall';
 
@@ -16,7 +16,8 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       type: "oauth",
       secret: process.env.SECRET,
       wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
-      userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/scim2/Me",
+      //userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/scim2/Me",
+      userinfo: config.WSO2IS_HOST+"/t/"+config.WSO2IS_TENANT_NAME+"/oauth2/userinfo",
       // wellKnown: process.env.WSO2IS_HOST + "/o/" + process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID + "/oauth2/token/.well-known/openid-configuration",
       // userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"/oauth2/userinfo",
       authorization: {
@@ -25,6 +26,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         }
       },
       profile(profile) {
+        consoleLogDebug('profile2',profile);
         return {
           id: profile.sub
         }
@@ -35,27 +37,29 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
   callbacks: {
 
     async jwt({ token, user, account, profile, isNewUser }) {
-      consoleLogDebug('token', token);
-      consoleLogDebug('profile', profile);
       if (account) {
         token.accessToken = account.access_token
         token.idToken = account.id_token
         token.scope = account.scope
+        token.user = profile
       }
       return token
     },
     async session({ session, token, user }) {
-
-      const orgSession = await switchOrg(req, token.accessToken);
-
+      const orgSession = await switchOrg(req, token.accessToken); 
       if(!orgSession){
         session.error = true;
-      } else {
+      } else if(orgSession.expiresIn<=0){
+        session.expires = true
+      }
+      else {
         session.accessToken = orgSession.access_token
         session.idToken = orgSession.id_token
         session.scope = orgSession.scope
         session.refreshToken = orgSession.refresh_token
+        session.expires = false
         session.userId = getLoggedUserId(session.idToken)
+        session.user = getLoggedUserFromProfile(token.user)
       }
 
       return session

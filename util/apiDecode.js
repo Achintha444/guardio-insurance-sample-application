@@ -4,6 +4,7 @@ import { consoleLogDebug, consoleLogError, consoleLogInfo } from "./util";
 const API_DECODE = "API DECODE";
 
 function decodeUser(user) {
+    consoleLogDebug('user',user);
     return {
         "id": user.id,
         "username": user.userName,
