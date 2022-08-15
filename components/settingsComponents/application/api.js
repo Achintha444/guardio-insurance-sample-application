@@ -1,6 +1,5 @@
 import config from "../../../config.json";
 
-
 export const listApplications = async ({limit, offset, filter = null, session}) => {
 
     const DEFAULT_FILTER = filter || "name co *";

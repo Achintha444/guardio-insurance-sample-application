@@ -18,7 +18,7 @@ import { orgSignout } from '../../util/util';
 import AddUserComponent from './addUserComponent';
 import IdentityProviders from "./identity-providers/identity-providers";
 import { checkCustomization,hideBasedOnScopes } from '../../util/util';
-import Application from "../components/settingsComponents/application/application";
+import Application from "./application/application";
 
 export default function Settings(props) {
 
@@ -41,7 +41,7 @@ export default function Settings(props) {
             case '2-3':
                 return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
             case '3-1':
-                return <Application session={session} />
+                return <Application orgName={props.name} session={session} />
         }
     }
 
