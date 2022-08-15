@@ -7,6 +7,7 @@ import styles from '../../styles/Settings.module.css';
 import { consoleLogDebug } from '../../util/util';
 import EditUserComponent from '../editUser/editUserComponent';
 import SettingsTitle from '../util/settingsTitle';
+import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
 
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
@@ -15,7 +16,8 @@ export default function ViewUserComponent(props) {
     const [openUser, setOpenUser] = useState({});
 
     const fetchData = async () => {
-        const res = await usersDetails(props.session);
+        //const res = await usersDetails(props.session);
+        const res = await decodeViewUsers(props.session);
         setUsers(res);
     }
 
