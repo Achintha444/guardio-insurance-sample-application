@@ -8,7 +8,7 @@ import { API } from '../../../util/constants';
 
 export default async function me(req , res) {
     if(req.method !== 'POST'){
-        
+        res.status(404).json('meData');
     }
 
     const body = JSON.parse(req.body);
@@ -22,7 +22,6 @@ export default async function me(req , res) {
             getDataHeader(session)
         );
         const meData = await fetchData.json();
-
         res.status(200).json(meData);
     } catch (err) {
         res.status(404).json('meData');
