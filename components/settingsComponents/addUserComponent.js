@@ -8,6 +8,7 @@ import { successTypeDialog, errorTypeDialog } from '../util/dialog';
 import styles from '../../styles/Settings.module.css';
 import SuccessDialog from '../util/successDialog';
 import SettingsTitle from '../util/settingsTitle';
+import decodeAddUser from '../../util/apiDecode/settings/decodeAddUser';
 
 export default function AddUserComponent(props) {
 
@@ -83,7 +84,7 @@ export default function AddUserComponent(props) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        addUserEncode(props.session, values.name, values.email,
+        decodeAddUser(props.session, values.name, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
