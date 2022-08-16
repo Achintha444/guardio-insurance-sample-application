@@ -138,10 +138,10 @@ function getLoggedUserId(token) {
 }
 
 function getLoggedUser(token) {
-    const jwtParse = parseJwt(token);
-    const user = {};
-
     try {
+        const jwtParse = parseJwt(token);
+        const user = {};
+        
         user.id = jwtParse.sub;
         user.name = { "givenName": jwtParse.given_name };
         user.emails = [jwtParse.email];
