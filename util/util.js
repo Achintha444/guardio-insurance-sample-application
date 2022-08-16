@@ -160,7 +160,10 @@ function getLoggedUserFromProfile(profile){
         user.name = { "givenName": profile.given_name };
         user.emails = [profile.email];
         user.userName = profile.username;
-
+        
+        if (user.name=={}|| !user.emails[0] || !user.userName) {
+            return null
+        }
         return user;
     } catch (err) {
         return null

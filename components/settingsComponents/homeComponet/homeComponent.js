@@ -1,17 +1,13 @@
-import { FlexboxGrid, Panel } from 'rsuite';
-import Image from 'next/image'
-import Logo from '../../logo/logo';
-import styles from '../../../styles/Settings.module.css';
-import profileImage from '../../../public/profile.svg'
+import { Panel } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
+import styles from '../../../styles/Settings.module.css';
+import Logo from '../../logo/logo';
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { meDetails } from '../../../util/apiDecode';
-import { hideBasedOnScopes } from '../../../util/util';
 
-import { fetchUsers } from '../../../util/apiCall';
-import UserDetails from './userDetails';
 import LatestNewsComponent from './latestNewsComponent';
+import UserDetails from './userDetails';
 
 export default function HomeComponent(props) {
 
@@ -44,7 +40,10 @@ export default function HomeComponent(props) {
             </Panel>
             {
                 me == null ?
-                    <></> :
+                    <Panel bordered>
+                        <div>Add the user attributes in created the application to display user details</div>
+                    </Panel>
+                    :
                     <Panel header="User Details" bordered>
                         <div id="userDetails" className={styles.homePanel}>
                             <UserDetails me={me} session={props.session} />
