@@ -4,6 +4,7 @@ import { Button, ButtonToolbar, Loader, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
 import { addUserEncode } from '../../util/apiDecode';
 import { successTypeDialog, errorTypeDialog } from '../util/dialog';
+import {LOADING_DISPLAY_NONE,LOADING_DISPLAY_BLOCK} from '../../util/util/frontendUtil/frontendUtil'
 
 import styles from '../../styles/Settings.module.css';
 import SuccessDialog from '../util/successDialog';
@@ -13,13 +14,6 @@ import decodeAddUser from '../../util/apiDecode/settings/decodeAddUser';
 export default function AddUserComponent(props) {
 
     const ADD_USER_COMPONENT = "ADD USER COMPONENT";
-
-    const LOADING_DISPLAY_NONE = {
-        display: "none"
-    };
-    const LOADING_DISPLAY_BLOCK = {
-        display: "block"
-    };
 
     const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 

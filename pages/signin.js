@@ -7,7 +7,8 @@ import Cookie from 'js-cookie';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
-import { getRouterQuery, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, stringIsEmpty } from '../util/util';
+import {LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE} from '../util/util/frontendUtil/frontendUtil'
+import { getRouterQuery, stringIsEmpty } from '../util/util';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
