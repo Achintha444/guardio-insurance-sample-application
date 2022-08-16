@@ -5,8 +5,6 @@ import cookie from "cookie";
 
 const SWITCH_API_CALL = "Switch API Call";
 
-//var orgId = JSCookie.get("orgId");
-
 function setOrgId(request){
     const cookies = parseCookies(request);
     const subOrgId = cookies.orgId;
@@ -18,7 +16,6 @@ function getBasicAuth(){
     return Buffer.from(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`).toString('base64');
 }
 
-// "Authorization" : `Basic ${btoa(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`)}`,
 function getSwitchHeader() {
     
     const headers = {
@@ -30,9 +27,7 @@ function getSwitchHeader() {
     }
     return headers;
 }
-//SYSTEM profile openid
-//'scope': `SYSTEM ${config.WSO2IS_SCOPES}`,
-// 'switching_organization': "5c1a730c-97c1-4d78-b245-196031efa1db",
+
 function getSwitchBody(oId, accessToken) {
     const body = {
         'grant_type': 'organization_switch',
@@ -54,11 +49,18 @@ function getSwitchResponse(oId, accessToken) {
     return request;
 }
 
+function getSwitchEndpoint(){
+    if(config.WSO2IS_TENANT_NAME=='carbon.super'){
+        return `${config.WSO2IS_HOST}/oauth2/token`
+    }
+    return `${config.WSO2IS_HOST}/o/${config.WSO2IS_TENANT_NAME}/oauth2/token`
+}
+
 async function switchOrg(request,accessToken) {
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/oauth2/token`,
+           getSwitchEndpoint(),
             getSwitchResponse(setOrgId(request), accessToken)
         );
         const data = await res.json();
