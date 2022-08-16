@@ -1,5 +1,5 @@
-import { consoleLogDebug, consoleLogError, consoleLogInfo, parseCookies } from "./util";
-import config from '../config.json';
+import { consoleLogDebug, consoleLogError, consoleLogInfo, parseCookies } from "../util";
+import config from '../../config.json';
 import JSCookie from 'js-cookie';
 import cookie from "cookie";
 
