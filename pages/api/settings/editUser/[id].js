@@ -26,7 +26,6 @@ export default async function editUser(req, res) {
             getSentDataRequestOptions(session, RequestMethod.PATCH, user)
         );
         const data = await fetchData.json();
-        consoleLogDebug('data',data);
         res.status(200).json(data);    
     } catch (err) {
         res.status(404).json('meData');
