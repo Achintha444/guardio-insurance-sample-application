@@ -1,11 +1,9 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React from 'react';
 
-import config from '../../config.json';
-import { redirect,emptySession, getOrg, getOrgIdfromRouterQuery, getRouterQuery,parseCookies } from '../../util/util';
 import { getSession } from 'next-auth/react';
-import Cookie from 'js-cookie';
 import Settings from '../../components/settingsComponents/settings';
+import { emptySession, parseCookies, redirect } from '../../util/util';
+import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
 //import cookie from "cookie";
 
 // export async function getInitialProps(context){

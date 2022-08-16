@@ -1,14 +1,15 @@
-import { getSession, signIn } from 'next-auth/react'
-import React, { useEffect, useState } from 'react';
-import styles from '../styles/Signin.module.css';
-import { Button, Dropdown, Form } from 'rsuite';
-import config from '../config.json';
 import Cookie from 'js-cookie';
+import { getSession, signIn } from 'next-auth/react';
+import React, { useEffect, useState } from 'react';
+import { Button, Dropdown } from 'rsuite';
+import config from '../config.json';
+import styles from '../styles/Signin.module.css';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
-import {LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE} from '../util/util/frontendUtil/frontendUtil'
-import { getRouterQuery, stringIsEmpty } from '../util/util';
+import { stringIsEmpty } from '../util/util';
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../util/util/frontendUtil/frontendUtil';
+import { getRouterQuery } from '../util/util/orgUtil/orgUtil';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
