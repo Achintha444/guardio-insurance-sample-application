@@ -1,4 +1,4 @@
-import {checkAdmin} from '../orgUtil/orgUtil'
+import { checkAdmin } from '../orgUtil/orgUtil';
 
 const LOADING_DISPLAY_NONE = {
     display: "none"
