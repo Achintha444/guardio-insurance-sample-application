@@ -4,6 +4,7 @@ import { Form, Field } from 'react-final-form';
 import FormSuite from 'rsuite/Form';
 import { editUserEncode } from '../../util/apiDecode';
 import { successTypeDialog, errorTypeDialog } from '../util/dialog';
+import {LOADING_DISPLAY_NONE,LOADING_DISPLAY_BLOCK} from '../../util/util/frontendUtil/frontendUtil'
 
 import styles from '../../styles/util.module.css';
 import stylesSettings from '../../styles/Settings.module.css';
@@ -12,13 +13,6 @@ import decodeEditUser from '../../util/apiDecode/settings/decodeEditUser';
 export default function EditUserComponent(props) {
 
     const toaster = useToaster();
-
-    const LOADING_DISPLAY_NONE = {
-        display: "none"
-    };
-    const LOADING_DISPLAY_BLOCK = {
-        display: "block"
-    };
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
