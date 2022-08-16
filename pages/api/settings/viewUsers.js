@@ -2,7 +2,7 @@
 import config from '../../../config.json';
 import Cookie from 'js-cookie';
 import { NextApiRequest, NextApiResponse } from "next";
-import getDataHeader from '../../../util/apiUtil/getDataHeader';
+import getDataHeader from '../../../util/util/apiUtil/getDataHeader';
 import {consoleLogDebug,consoleLogError} from '../../../util/util';
 import { API } from '../../../util/constants';
 

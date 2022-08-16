@@ -7,6 +7,7 @@ import { successTypeDialog, errorTypeDialog } from '../util/dialog';
 
 import styles from '../../styles/util.module.css';
 import stylesSettings from '../../styles/Settings.module.css';
+import decodeEditUser from '../../util/apiDecode/settings/decodeEditUser';
 
 export default function EditUserComponent(props) {
 
@@ -62,7 +63,8 @@ export default function EditUserComponent(props) {
 
     const onSubmit = async (values ,form)=> {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        editUserEncode(props.session, props.user.id, values.name, values.email,
+        //decodeEditUser
+        decodeEditUser(props.session, props.user.id, values.name, values.email,
             values.username)
             .then((response) => onDataSubmit(response, form))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
