@@ -4,11 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { Button, Nav, Sidenav } from 'rsuite';
 import styles from '../../styles/Settings.module.css';
 
-
 import { useSession } from 'next-auth/react';
 import "rsuite/dist/rsuite.min.css";
-import { hideBasedOnScopes, orgSignout } from '../../util/util';
-import { checkCustomization } from '../../util/util/frontendUtil/frontendUtil';
+import { orgSignout } from '../../util/util';
+import { checkCustomization, hideBasedOnScopes } from '../../util/util/frontendUtil/frontendUtil';
 import AddUserComponent from './addUserComponent';
 import HomeComponent from './homeComponet/homeComponent';
 import IdentityProviders from "./identity-providers/identity-providers";
