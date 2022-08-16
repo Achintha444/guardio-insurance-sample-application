@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import { consoleLogDebug, getLoggedUserId, getLoginOrgId,getLoggedUser,getLoggedUserFromProfile } from "../../../util/util";
 import config from '../../../config.json';
-import { switchOrg } from '../../../util/switchApiCall';
+import { switchOrg } from '../../../util/apiCall/switchApiCall';
 
 //export default (req, res) => NextAuth(req, res, getOptions(req));
 
