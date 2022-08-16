@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Container, CustomProvider, Panel, Placeholder } from 'rsuite';
-import styles from '../../styles/Settings.module.css';
-import { Sidenav, Nav } from 'rsuite';
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-import config from '../../config.json';
+import React, { useEffect, useState } from 'react';
+import { Button, Nav, Sidenav } from 'rsuite';
+import styles from '../../styles/Settings.module.css';
 
 
+import { useSession } from 'next-auth/react';
 import "rsuite/dist/rsuite.min.css";
-import Logo from '../logo/logo';
-import { getSession, signOut, useSession } from 'next-auth/react';
+import { hideBasedOnScopes, orgSignout } from '../../util/util';
+import { checkCustomization } from '../../util/util/frontendUtil/frontendUtil';
+import AddUserComponent from './addUserComponent';
 import HomeComponent from './homeComponet/homeComponent';
+import IdentityProviders from "./identity-providers/identity-providers";
 import LogoComponent from './logoComponent';
 import ViewUserComponent from './viewUserComponent';
-import { meDetails } from '../../util/apiDecode';
-import { orgSignout } from '../../util/util';
-import AddUserComponent from './addUserComponent';
-import IdentityProviders from "./identity-providers/identity-providers";
-import { checkCustomization,hideBasedOnScopes } from '../../util/util';
 
 export default function Settings(props) {
 
