@@ -22,7 +22,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       // userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"/oauth2/userinfo",
       authorization: {
         params: {
-          scope: config.WSO2IS_SCOPES,
+          scope: config.WSO2IS_SCOPES.join(" "),
         }
       },
       profile(profile) {

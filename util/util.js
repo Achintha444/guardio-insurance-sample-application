@@ -1,8 +1,7 @@
 import config from '../config.json';
 import cookie from "cookie";
 import FrontCookie from 'js-cookie';
-import { signOut } from 'next-auth/react';
-import { infoTypeDialog } from '../components/util/dialog';
+import {signOut} from 'next-auth/react';
 
 // Common Util
 
@@ -92,8 +91,7 @@ function checkCustomization(colorTheme) {
 // Routing related util
 
 function checkAdmin(scopes) {
-    const adminScopes = ["email", "internal_login", "internal_user_mgt_create", "internal_user_mgt_delete",
-        "internal_user_mgt_list", "internal_user_mgt_update", "internal_user_mgt_view", "openid", "profile"];
+    const adminScopes = [...config.WSO2IS_SCOPES];
 
     for (let i = 0; i < adminScopes.length; i++) {
         if (!scopes.includes(adminScopes[i])) {
