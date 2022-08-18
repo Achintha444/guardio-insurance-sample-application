@@ -37,12 +37,11 @@ export default function IdentityProviders() {
     }, []);
 
     const fetchAllIdPs = async () => {
-        const res = await
-            listAllIdentityProviders({
-                limit: 10,
-                offset: 0,
-                session
-            })
+        const res = await listAllIdentityProviders({
+            limit: 10,
+            offset: 0,
+            session
+        });
         if (res && res.identityProviders) {
             setIdpList(res.identityProviders);
         } else {
@@ -124,6 +123,13 @@ export default function IdentityProviders() {
 
         const response = await createIdentityProvider({model, session});
 
+        setIdpList([
+            ...idpList,
+            response
+        ]);
+
+        setOpenAddModal(false);
+        setSelectedTemplate(undefined);
 
     };
 
@@ -134,18 +140,23 @@ export default function IdentityProviders() {
                     <h2>Identity Providers</h2>
                     <p>Manage identity providers to allow users to log in to your application through them.</p>
                 </Stack>
-                <Stack>
-                    <Button appearance="primary" size="lg" onClick={onAddIdentityProviderClick}>
-                        Add Identity Provider
-                    </Button>
-                </Stack>
+                {idpList.length > 0 && (
+                    <Stack>
+                        <Button appearance="primary" size="lg"
+                                onClick={onAddIdentityProviderClick}>
+                            Add Identity Provider
+                        </Button>
+                    </Stack>
+                )}
             </Stack>
             <FlexboxGrid
                 style={{width: "100%", height: "60vh", marginTop: "24px"}}
                 justify={idpList.length === 0 ? "center" : "start"}
                 align={idpList.length === 0 ? "middle" : "top"}>
                 {idpList.length === 0
-                    ? <EmptyIdentityProviderList/>
+                    ? <EmptyIdentityProviderList
+                        onAddIdentityProviderClick={onAddIdentityProviderClick}
+                    />
                     : <IdentityProviderList
                         fetchAllIdPs={fetchAllIdPs}
                         idpList={idpList}
@@ -183,8 +194,8 @@ const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
 
     const {data: session} = useSession();
 
-    const onIdPEditClick = (id) => {
-        alert("NOT IMPLEMENTED", id);
+    const onIdPEditClick = (ignoredId) => {
+        alert("NOT IMPLEMENTED");
     };
 
     const onIdPDeleteClick = (id) => {
@@ -219,10 +230,6 @@ const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
 
 const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSelected}) => {
 
-    const handleClose = () => {
-        onClose();
-    };
-
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
             return "google.svg";
@@ -238,8 +245,8 @@ const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSele
 
     return (
         <Modal open={openModal}
-               onClose={handleClose}
-               onBackdropClick={handleClose}>
+               onClose={onClose}
+               onBackdropClick={onClose}>
             <Modal.Header>
                 <Modal.Title>Select Identity Provider</Modal.Title>
                 <p>Choose one of the following identity providers.</p>
@@ -269,7 +276,7 @@ const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSele
 
 };
 
-const EmptyIdentityProviderList = () => {
+const EmptyIdentityProviderList = ({onAddIdentityProviderClick}) => {
 
     return (
         <Stack alignItems="center" direction="column">
@@ -277,7 +284,9 @@ const EmptyIdentityProviderList = () => {
             <p style={{marginTop: "20px", fontSize: 14}}>
                 There are no identity providers available at the moment.
             </p>
-            <Button appearance="primary" size="md" style={{marginTop: "12px"}}>
+            <Button appearance="primary"
+                    onClick={onAddIdentityProviderClick}
+                    size="md" style={{marginTop: "12px"}}>
                 Add Identity Provider
             </Button>
         </Stack>
@@ -345,8 +354,6 @@ const IdPCreationModal = ({openModal, onSave, onCancel, template}) => {
     );
 
 };
-
-// --
 
 const FacebookIdentityProvider = ({onFormValuesChange, formValues}) => {
 
@@ -437,4 +444,3 @@ const EnterpriseIdentityProvider = ({onFormValuesChange, formValues}) => {
     );
 
 }
-

@@ -18,6 +18,7 @@ import { orgSignout } from '../../util/util';
 import AddUserComponent from './addUserComponent';
 import IdentityProviders from "./identity-providers/identity-providers";
 import { checkCustomization,hideBasedOnScopes } from '../../util/util';
+import Application from "./application/application";
 
 export default function Settings(props) {
 
@@ -37,9 +38,10 @@ export default function Settings(props) {
                 return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-2':
                 return <AddUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
-            // case '2-3':
-            //     return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
-
+            case '2-3':
+                return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
+            case '3-1':
+                return <Application orgName={props.name} session={session} />
         }
     }
 
@@ -68,7 +70,12 @@ export default function Settings(props) {
                                 style={hideBasedOnScopes(session.scope)}>
                                 <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Manage Users</Nav.Item>
                                 <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
-                                {/* <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item> */}
+                                <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item>
+                                <Nav.Item
+                                    eventKey="3-1"
+                                    onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                                    Manage Application
+                                </Nav.Item>
                             </Nav.Menu>
                         </Nav>
                     </Sidenav.Body>

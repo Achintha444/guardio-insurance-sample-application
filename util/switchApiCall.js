@@ -29,7 +29,7 @@ function getSwitchHeader() {
 function getSwitchBody(oId, accessToken) {
     const body = {
         'grant_type': 'organization_switch',
-        'scope': config.WSO2IS_SCOPES,
+        'scope': config.WSO2IS_SCOPES.join(" "),
         'switching_organization': oId,
         'token': accessToken
     }
