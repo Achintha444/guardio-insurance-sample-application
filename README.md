@@ -3,6 +3,7 @@
 Guardio Insurance Sample Application repository contains an application that demonstrate capabilities of the organisation management feature in the WSO2 Identity Sever.
 
 ## Prerequesites
+You need to install nodejs >14.
 
 ## Getting Started
 
