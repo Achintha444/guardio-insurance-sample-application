@@ -1,10 +1,5 @@
-//import { consoleLogDebug, consoleLogError, consoleLogInfo } from "../../../util/util";
 import config from '../../../config.json';
-import Cookie from 'js-cookie';
-import { NextApiRequest, NextApiResponse } from "next";
 import getDataHeader from '../../../util/util/apiUtil/getDataHeader';
-import {consoleLogDebug,consoleLogError} from '../../../util/util';
-import { API } from '../../../util/constants';
 
 export default async function me(req , res) {
     if(req.method !== 'POST'){

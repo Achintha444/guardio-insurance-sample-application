@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Field, FORM_ERROR } from 'react-final-form'
+import React, { useState } from 'react';
+import { Field, Form } from 'react-final-form';
 import { Button, ButtonToolbar, Loader, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
-import { addUserEncode } from '../../util/apiDecode';
-import { successTypeDialog, errorTypeDialog } from '../util/dialog';
-import {LOADING_DISPLAY_NONE,LOADING_DISPLAY_BLOCK} from '../../util/util/frontendUtil/frontendUtil'
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util/frontendUtil/frontendUtil';
+import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 
 import styles from '../../styles/Settings.module.css';
-import SuccessDialog from '../util/successDialog';
-import SettingsTitle from '../util/settingsTitle';
 import decodeAddUser from '../../util/apiDecode/settings/decodeAddUser';
+import SettingsTitle from '../util/settingsTitle';
+import SuccessDialog from '../util/successDialog';
 
 export default function AddUserComponent(props) {
 

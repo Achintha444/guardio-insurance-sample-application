@@ -1,13 +1,12 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Modal, ButtonToolbar, Button, Loader, useToaster } from 'rsuite';
-import { Form, Field } from 'react-final-form';
+import React, { useState } from 'react';
+import { Field, Form } from 'react-final-form';
+import { Button, ButtonToolbar, Loader, Modal, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
-import { editUserEncode } from '../../util/apiDecode';
-import { successTypeDialog, errorTypeDialog } from '../util/dialog';
-import {LOADING_DISPLAY_NONE,LOADING_DISPLAY_BLOCK} from '../../util/util/frontendUtil/frontendUtil'
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util/frontendUtil/frontendUtil';
+import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 
-import styles from '../../styles/util.module.css';
 import stylesSettings from '../../styles/Settings.module.css';
+import styles from '../../styles/util.module.css';
 import decodeEditUser from '../../util/apiDecode/settings/decodeEditUser';
 
 export default function EditUserComponent(props) {

@@ -1,12 +1,6 @@
-//import { consoleLogDebug, consoleLogError, consoleLogInfo } from "../../../util/util";
 import config from '../../../../config.json';
-import Cookie from 'js-cookie';
-import { NextApiRequest, NextApiResponse } from "next";
-import getDataHeader from '../../../../util/util/apiUtil/getDataHeader';
-import { consoleLogDebug, consoleLogError } from '../../../../util/util';
-import { API } from '../../../../util/constants';
+import { getSentDataRequestOptions } from '../../../../util/util/apiUtil/getSentDataRequestOptions';
 import { RequestMethod } from '../../../../util/util/apiUtil/requestMethod';
-import { getSentDataRequestOptions } from '../../../../util/util/apiUtil/getSentDataRequestOptions'
 
 export default async function editUser(req, res) {
     if (req.method !== 'POST') {

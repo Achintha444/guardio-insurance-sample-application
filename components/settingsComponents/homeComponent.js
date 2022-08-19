@@ -1,27 +1,19 @@
+import Image from 'next/image';
 import { Panel } from 'rsuite';
-import Image from 'next/image'
-import Logo from '../logo/logo';
-import styles from '../../styles/Settings.module.css';
-import profileImage from '../../public/profile.svg'
 import "rsuite/dist/rsuite.min.css";
+import profileImage from '../../public/profile.svg';
+import styles from '../../styles/Settings.module.css';
+import Logo from '../logo/logo';
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { meDetails } from '../../util/apiDecode';
 import { consoleLogDebug } from '../../util/util';
 
-import { fetchUsers } from '../../util/apiCall';
 import callMe from '../../util/apiCall/dashboard/callMe';
 
 export default function HomeComponent(props) {
 
     const [me, setMe] = useState(null);
-
-    // const fetchData = async()=> {
-    //     const res = await meDetails(props.session);
-    //     setMe(res);
-    // }
-
-    // fetchData();
 
     useEffect(() => {
         async function fetchData() {

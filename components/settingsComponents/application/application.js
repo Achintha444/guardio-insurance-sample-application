@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Button, Container, IconButton, Loader, Modal, Nav, Stack} from "rsuite";
-import {getApplicationDetails, listApplications, patchApplication} from "./api";
-import {useSession} from "next-auth/react";
-import Trash from '@rsuite/icons/Trash';
 import Plus from '@rsuite/icons/Plus';
+import Trash from '@rsuite/icons/Trash';
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { Button, Container, IconButton, Loader, Modal, Nav, Stack } from "rsuite";
 import config from '../../../config.json';
+import { getApplicationDetails, listApplications, patchApplication } from "./api";
 
+import { getDetailedIdentityProvider, listAllIdentityProviders } from "../identity-providers/api";
 import styles from "./app.module.css";
-import {getDetailedIdentityProvider, listAllIdentityProviders} from "../identity-providers/api";
 
 export default function Application() {
 

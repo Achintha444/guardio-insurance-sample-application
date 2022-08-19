@@ -1,5 +1,5 @@
-import config from '../config.json';
-import { consoleLogDebug, consoleLogError, parseCookies } from "./util";
+import config from '../../config.json';
+import { consoleLogDebug, consoleLogError, parseCookies } from "../util";
 
 const SWITCH_API_CALL = "Switch API Call";
 

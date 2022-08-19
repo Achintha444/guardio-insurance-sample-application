@@ -1,5 +1,5 @@
-import Logo from '../logo/logo';
 import styles from '../../styles/Settings.module.css';
+import Logo from '../logo/logo';
 
 export default function LogoComponent(props) {
     return <div className={styles.logoDiv}>

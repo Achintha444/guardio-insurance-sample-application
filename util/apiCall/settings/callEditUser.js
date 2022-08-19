@@ -1,8 +1,6 @@
-import { consoleLogDebug, consoleLogError, consoleLogInfo } from "../../util";
-import config from '../../../config.json';
 import Cookie from 'js-cookie';
-import { getInternalApiRequestOptionsWithParam } from '../../util/apiUtil/getInteralApiRequestOptions'
-import { API_CALL } from "../../constants";
+import config from '../../../config.json';
+import { getInternalApiRequestOptionsWithParam } from '../../util/apiUtil/getInteralApiRequestOptions';
 
 const subOrgId = Cookie.get("orgId");
 

@@ -4,12 +4,6 @@ import { getSession } from 'next-auth/react';
 import Settings from '../../components/settingsComponents/settings';
 import { emptySession, parseCookies, redirect } from '../../util/util';
 import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
-//import cookie from "cookie";
-
-// export async function getInitialProps(context){
-//   const cookies = parseCookies(req);
-
-// }
 
 export async function getServerSideProps(context) {
 
@@ -23,10 +17,6 @@ export async function getServerSideProps(context) {
   if(session.expires){
     return redirect('/500');
   }
-
-  // if (!session) {
-  //   return redirect('/signin');
-  // }
 
   const cookies = parseCookies(context.req);
   const subOrgId = cookies.orgId;
@@ -44,60 +34,6 @@ export async function getServerSideProps(context) {
       setOrg = getOrg(subOrgId);
     }
   }
-
-
-  // //sessionStorage
-  // const routerQuery = context.query.id;
-  // // useEffect(() => {
-  // //   setValue(sessionStorage.setItem("routerQuery", "asdasd"))
-  // // }, [])
-  // if (typeof window !== 'undefined') {
-  //   return redirect('/signin');
-  //   sessionStorage.setItem("routerQuery", "asdasd");
-  // }
-
-  // const routerQuery = context.query.id;
-  // const currentOrgId = context.query.orgId;
-  // let setOrg = {};
-
-  // let orgId = getOrgIdfromRouterQuery(routerQuery);
-
-  // if(orgId==undefined){
-  //   return redirect('/404');
-  // }
-
-  // setOrg = getOrg(orgId);
-
-  // // const cookies = res.cookies;
-  // const currentOrgId = getCookie('orgId');
-  // const routerQuery = context.query.id;
-
-  // let setOrg = {};
-
-  // if (currentOrgId == undefined) {
-  //   const orgId = context.query.orgId;
-
-  //   setOrg = getOrg(orgId);
-
-  //   if (setOrg == undefined) {
-  //     return redirect('/404')
-  //   }
-
-  //   setCookie('orgId', orgId,{});
-
-  //   // context.res.setHeader("Set-Cookie",
-  //   //   cookie.serialize("orgId", orgId, {
-  //   //     httpOnly: true,
-  //   //     path: "/",
-  //   //     sameSite: "strict"
-  //   //   }))
-  // }
-
-  // else {
-  //   if (getRouterQuery(currentOrgId) != routerQuery) {
-  //     //return redirect('/404')
-  //   }
-  // }
 
   return {
     props: { session, setOrg },

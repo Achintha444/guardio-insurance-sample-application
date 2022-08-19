@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
-import style from '../styles/Error.module.css'
+import style from '../styles/Error.module.css';
 
-import { Button, Col, Content, FlexboxGrid, Grid, Panel, Row } from 'rsuite';
-import errorImage from '../public/error.svg';
 import { useRouter } from 'next/router';
+import { Button, Col, Grid, Row } from 'rsuite';
+import errorImage from '../public/error.svg';
 
 
 export default function Custom404() {

@@ -1,4 +1,3 @@
-//import { consoleLogDebug, consoleLogError, consoleLogInfo } from "../../../util/util";
 import config from '../../../config.json';
 import { RequestMethod } from '../../../util/util/apiUtil/requestMethod';
 import { getSentDataRequestOptions } from '../../../util/util/apiUtil/getSentDataRequestOptions'
