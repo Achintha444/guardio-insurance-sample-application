@@ -5,6 +5,7 @@ import styles from '../../styles/Settings.module.css';
 import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
 import EditUserComponent from '../editUser/editUserComponent';
 import SettingsTitle from '../util/settingsTitle';
+import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
 
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
