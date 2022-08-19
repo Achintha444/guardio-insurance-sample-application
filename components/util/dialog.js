@@ -1,5 +1,5 @@
-import React from 'react'
-import { Notification, useToaster } from 'rsuite'
+import React from 'react';
+import { Notification } from 'rsuite';
 
 function Dialog(props) {
     return (

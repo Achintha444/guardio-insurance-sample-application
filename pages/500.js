@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
-import style from '../styles/Error.module.css'
+import style from '../styles/Error.module.css';
 
-import { Button, Col, Content, FlexboxGrid, Grid, Panel, Row } from 'rsuite';
-import error500Image from '../public/500.svg';
 import { useRouter } from 'next/router';
-import { orgSignout } from '../util/util'
+import { Button, Col, Grid, Row } from 'rsuite';
+import error500Image from '../public/500.svg';
+import { orgSignout } from '../util/util';
 
 
 export default function Custom500() {

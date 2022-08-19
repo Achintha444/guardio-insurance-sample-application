@@ -1,10 +1,8 @@
+import React, { useEffect, useState } from 'react';
 import { Table } from 'rsuite';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { usersDetails } from '../../util/apiDecode';
-import { fetchUsers } from '../../util/apiCall';
 
 import styles from '../../styles/Settings.module.css';
-import { consoleLogDebug } from '../../util/util';
+import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
 import EditUserComponent from '../editUser/editUserComponent';
 import SettingsTitle from '../util/settingsTitle';
 
@@ -15,7 +13,8 @@ export default function ViewUserComponent(props) {
     const [openUser, setOpenUser] = useState({});
 
     const fetchData = async () => {
-        const res = await usersDetails(props.session);
+        //const res = await usersDetails(props.session);
+        const res = await decodeViewUsers(props.session);
         setUsers(res);
     }
 

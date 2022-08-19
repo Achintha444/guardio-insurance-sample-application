@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import React from 'react'
-import { Panel } from 'rsuite'
+import Image from 'next/image';
+import React from 'react';
+import { Panel } from 'rsuite';
+import image1 from '../../../public/news1.jpeg';
+import image2 from '../../../public/news2.jpeg';
+import image3 from '../../../public/news3.jpeg';
+import image4 from '../../../public/news4.jpeg';
 import { getCurrentDate } from '../../../util/util';
-import  image1  from '../../../public/news1.jpeg';
-import  image2  from '../../../public/news2.jpeg';
-import  image3 from '../../../public/news3.jpeg';
-import  image4  from '../../../public/news4.jpeg';
 
 export default function NewsComponent(props) {
     return (

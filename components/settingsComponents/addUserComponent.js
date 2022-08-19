@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Field, FORM_ERROR } from 'react-final-form'
+import React, { useState } from 'react';
+import { Field, Form } from 'react-final-form';
 import { Button, ButtonToolbar, Loader, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
-import { addUserEncode } from '../../util/apiDecode';
-import { successTypeDialog, errorTypeDialog } from '../util/dialog';
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../util/util/frontendUtil/frontendUtil';
+import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 
 import styles from '../../styles/Settings.module.css';
-import SuccessDialog from '../util/successDialog';
+import decodeAddUser from '../../util/apiDecode/settings/decodeAddUser';
 import SettingsTitle from '../util/settingsTitle';
+import SuccessDialog from '../util/successDialog';
 
 export default function AddUserComponent(props) {
 
     const ADD_USER_COMPONENT = "ADD USER COMPONENT";
-
-    const LOADING_DISPLAY_NONE = {
-        display: "none"
-    };
-    const LOADING_DISPLAY_BLOCK = {
-        display: "block"
-    };
 
     const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
@@ -83,7 +77,7 @@ export default function AddUserComponent(props) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        addUserEncode(props.session, values.name, values.email,
+        decodeAddUser(props.session, values.name, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))

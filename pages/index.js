@@ -1,13 +1,12 @@
-import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import homeImage from '../public/home.jpeg'
 import { Button } from 'rsuite'
 import Logo from '../components/logo/logo'
+import homeImage from '../public/home.jpeg'
+import styles from '../styles/Home.module.css'
 
-import "rsuite/dist/rsuite.min.css";
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import "rsuite/dist/rsuite.min.css"
 
 export default function Home() {
 

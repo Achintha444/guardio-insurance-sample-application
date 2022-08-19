@@ -1,9 +1,7 @@
 import NextAuth from "next-auth"
 import { consoleLogDebug, getLoggedUserId, getLoginOrgId,getLoggedUser,getLoggedUserFromProfile } from "../../../util/util";
 import config from '../../../config.json';
-import { switchOrg } from '../../../util/switchApiCall';
-
-//export default (req, res) => NextAuth(req, res, getOptions(req));
+import { switchOrg } from '../../../util/apiCall/switchApiCall';
 
 const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
@@ -16,10 +14,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       type: "oauth",
       secret: process.env.SECRET,
       wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
-      //userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/scim2/Me",
       userinfo: config.WSO2IS_HOST+"/t/"+config.WSO2IS_TENANT_NAME+"/oauth2/userinfo",
-      // wellKnown: process.env.WSO2IS_HOST + "/o/" + process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID + "/oauth2/token/.well-known/openid-configuration",
-      // userinfo: process.env.WSO2IS_HOST+"/t/"+process.env.NEXT_PUBLIC_WSO2IS_LIFE_ORG_ID+"/oauth2/userinfo",
       authorization: {
         params: {
           scope: config.WSO2IS_SCOPES.join(" "),

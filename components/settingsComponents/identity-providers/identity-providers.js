@@ -1,16 +1,16 @@
-import React, {useEffect, useMemo, useState} from "react";
-import {Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack} from "rsuite";
 import AppSelectIcon from '@rsuite/icons/AppSelect';
 import Edit from '@rsuite/icons/Edit';
 import Trash from '@rsuite/icons/Trash';
+import React, { useEffect, useMemo, useState } from "react";
+import { Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack } from "rsuite";
 
-import Enterprise from "../../data/templates/enterprise-identity-provider.json";
-import Google from "../../data/templates/google.json";
-import Facebook from "../../data/templates/facebook.json";
-import styles from "./idp.module.css";
+import { useSession } from "next-auth/react";
 import config from "../../../config.json";
-import {createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders} from "./api";
-import {useSession} from "next-auth/react";
+import Enterprise from "../../data/templates/enterprise-identity-provider.json";
+import Facebook from "../../data/templates/facebook.json";
+import Google from "../../data/templates/google.json";
+import { createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders } from "./api";
+import styles from "./idp.module.css";
 
 const GOOGLE_ID = "google-idp";
 const FACEBOOK_ID = "facebook-idp";

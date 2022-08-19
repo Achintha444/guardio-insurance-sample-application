@@ -19,11 +19,6 @@ export async function getServerSideProps(context) {
         return redirect(`/o/${config.SAMPLE_ORGS[1].routerQuery}`);
     }
 
-    return {
-        props: {
-            session: session,
-        },
-    }
 }
 
 export default function OIndex() {

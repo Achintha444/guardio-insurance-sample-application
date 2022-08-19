@@ -13,13 +13,6 @@ export default function HomeComponent(props) {
 
     const [me, setMe] = useState(null);
 
-    // const fetchData = async()=> {
-    //     const res = await meDetails(props.session);
-    //     setMe(res);
-    // }
-
-    // fetchData();
-
     useEffect(() => {
         async function fetchData() {
             const res = await meDetails(props.session);
